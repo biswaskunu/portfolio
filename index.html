@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Biswash Rath — Backend Engineer</title>
+<meta name="description" content="Biswash Rath — Rust/Axum/PostgreSQL backend engineer. 2nd year CSE student building production-style backend systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- ===== NAV ===== -->
+<header class="site-header" id="top">
+  <div class="header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">&gt;_</span> biswash<span class="brand-dim">.rath</span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#stack">Stack</a>
+      <a href="#log">Log</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow"><span class="dot"></span> Bhubaneswar, India — open to remote internships</p>
+      <h1 class="hero-title">
+        Backend engineer<br>
+        who ships <span class="accent">systems</span>,<br>
+        not tutorials.
+      </h1>
+      <p class="hero-sub">
+        2nd‑year CS undergrad specializing in <strong>Rust / Axum / PostgreSQL</strong>.
+        I build the kind of backend infrastructure — auth chains, bytecode VMs, real‑time
+        game servers — that most students only read about.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">View the work</a>
+        <a href="https://github.com/biswaskunu" target="_blank" rel="noopener" class="btn btn-ghost">github.com/biswaskunu</a>
+      </div>
+    </div>
+    <div class="hero-stats" id="heroStats">
+      <!-- populated by js/main.js -->
+    </div>
+  </section>
+
+  <!-- ===== WORK / FILTERABLE PROJECT INDEX (signature element) ===== -->
+  <section class="work" id="work">
+    <div class="section-head">
+      <p class="section-eyebrow">01 — Project index</p>
+      <h2 class="section-title">Find a project by stack</h2>
+      <p class="section-desc">Every project below is a real, shipped repo — not a spec. Filter by the technology you care about.</p>
+    </div>
+
+    <div class="filter-bar" role="group" aria-label="Filter projects by technology">
+      <div class="filter-search">
+        <span class="filter-prompt">$ grep --stack</span>
+        <input type="text" id="projectSearch" placeholder="search projects…" autocomplete="off">
+      </div>
+      <div class="filter-chips" id="filterChips">
+        <!-- populated by js/main.js -->
+      </div>
+      <button class="filter-clear" id="filterClear" type="button">Clear filters</button>
+    </div>
+
+    <p class="filter-count" id="filterCount" aria-live="polite">— open roles</p>
+
+    <div class="project-list" id="projectList">
+      <!-- populated by js/main.js -->
+    </div>
+  </section>
+
+  <!-- ===== STACK ===== -->
+  <section class="stack" id="stack">
+    <div class="section-head">
+      <p class="section-eyebrow">02 — Toolchain</p>
+      <h2 class="section-title">What I build with</h2>
+      <p class="section-desc">Depth over breadth — one core stack, worked consistently across four shipped projects.</p>
+    </div>
+    <div class="stack-grid" id="stackGrid">
+      <!-- populated by js/main.js -->
+    </div>
+  </section>
+
+  <!-- ===== LOG / HACKATHONS + VENTURES ===== -->
+  <section class="log" id="log">
+    <div class="section-head">
+      <p class="section-eyebrow">03 — Track record</p>
+      <h2 class="section-title">Hackathons &amp; ventures</h2>
+      <p class="section-desc">Competitive builds, plus the side projects that keep me shipping between semesters.</p>
+    </div>
+    <div class="log-grid" id="logGrid">
+      <!-- populated by js/main.js -->
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-title">Let's build<br>something real.</h2>
+      <p class="contact-sub">Open to remote backend internships — GSoC, MLH Fellowship, Outreachy, or a YC-stage startup that needs someone who ships.</p>
+      <div class="contact-links">
+        <a href="mailto:kunubiswas2@gmail.com" class="contact-link">
+          <span class="contact-label">Email</span>
+          <span class="contact-value">kunubiswas2@gmail.com</span>
+        </a>
+        <a href="https://github.com/biswaskunu" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">github.com/biswaskunu</span>
+        </a>
+        <a href="https://linkedin.com/in/biswash-rath-25a871379" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">biswash-rath-25a871379</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Biswash Rath. Built with plain HTML, CSS &amp; JS — no framework, on purpose.</p>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
