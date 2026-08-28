@@ -131,9 +131,4 @@ const LOG_ENTRIES = [
     title: "honest_developers_hub",
     detail: "Instagram channel on developer humor and programmer life — a creative outlet that doubles as a lead-gen channel.",
   },
-  {
-    kind: "Venture",
-    title: "E-book publishing",
-    detail: "Created and sold content targeting underserved niches in the Indian/Asian market.",
-  },
 ];

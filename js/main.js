@@ -21,6 +21,7 @@ const els = {
   logGrid: document.getElementById("logGrid"),
   navToggle: document.getElementById("navToggle"),
   mainNav: document.querySelector(".main-nav"),
+  backToTop: document.getElementById("backToTop"),
 };
 
 /**
@@ -59,6 +60,19 @@ function handleNavToggle() {
 }
 
 /**
+ * Shows the back-to-top button once the user has scrolled past the
+ * hero, hides it near the top of the page.
+ */
+function handleScrollVisibility() {
+  const shouldShow = window.scrollY > window.innerHeight * 0.6;
+  els.backToTop.classList.toggle("visible", shouldShow);
+}
+
+function handleBackToTopClick() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/**
  * Wires up all static sections that don't depend on filter state:
  * hero stats, stack grid, log grid.
  */
@@ -73,6 +87,8 @@ function bindEvents() {
   els.filterClear.addEventListener("click", handleClearFilters);
   els.projectSearch.addEventListener("input", handleSearchInput);
   els.navToggle.addEventListener("click", handleNavToggle);
+  els.backToTop.addEventListener("click", handleBackToTopClick);
+  window.addEventListener("scroll", handleScrollVisibility, { passive: true });
 
   // Close mobile nav after a link is tapped
   els.mainNav.querySelectorAll("a").forEach((a) =>
@@ -87,6 +103,7 @@ function init() {
   renderStaticSections();
   refreshProjectView();
   bindEvents();
+  handleScrollVisibility(); // in case the page loads mid-scroll (e.g. anchor link)
 }
 
 document.addEventListener("DOMContentLoaded", init);
