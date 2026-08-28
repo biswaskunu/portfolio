@@ -13,9 +13,9 @@
   --text-dim: #948f83;
   --text-faint: #625e54;
 
-  --accent: #ce422b;      /* Rust language orange */
-  --accent-soft: #e8734f;
-  --accent-wash: rgba(206, 66, 43, 0.12);
+  --accent: #14b8a6;      /* teal — cool, technical accent */
+  --accent-soft: #2dd4bf;
+  --accent-wash: rgba(20, 184, 166, 0.12);
 
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -29,7 +29,7 @@
 }
 
 /* Light mode — same structure, warmer paper tones instead of charcoal.
-   Rust orange stays the accent so the identity holds across themes. */
+   Teal stays the accent so the identity holds across themes. */
 :root[data-theme="light"] {
   --bg: #faf8f4;
   --bg-alt: #f2efe8;
@@ -39,9 +39,9 @@
   --text-dim: #6b6559;
   --text-faint: #9a9384;
 
-  --accent: #c33d21;
-  --accent-soft: #a83217;
-  --accent-wash: rgba(195, 61, 33, 0.08);
+  --accent: #0f9c8d;
+  --accent-soft: #0b7d71;
+  --accent-wash: rgba(15, 156, 141, 0.08);
 }
 
 * { box-sizing: border-box; }
