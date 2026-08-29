@@ -22,6 +22,8 @@ const els = {
   navToggle: document.getElementById("navToggle"),
   mainNav: document.querySelector(".main-nav"),
   backToTop: document.getElementById("backToTop"),
+  scrollProgress: document.getElementById("scrollProgress"),
+  revealSections: document.querySelectorAll(".reveal"),
 };
 
 /**
@@ -73,6 +75,58 @@ function handleBackToTopClick() {
 }
 
 /**
+ * Updates the fixed top progress bar to reflect how far through
+ * the page the user has scrolled (0–100%).
+ */
+function handleScrollProgress() {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  els.scrollProgress.style.width = `${pct}%`;
+}
+
+/**
+ * Reveals each `.reveal` section with a fade/slide-up once it enters
+ * the viewport, using IntersectionObserver so nothing runs on scroll
+ * for this part (cheaper than a scroll listener).
+ */
+function initSectionReveal() {
+  if (els.revealSections.length === 0) return;
+
+  if (!("IntersectionObserver" in window)) {
+    els.revealSections.forEach((s) => s.classList.add("revealed"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+  );
+
+  els.revealSections.forEach((section) => observer.observe(section));
+}
+
+/**
+ * Pressing "/" focuses the project search box (unless the user is
+ * already typing in a field), mirroring the shortcut on GitHub/Slack.
+ */
+function handleGlobalKeydown(event) {
+  const isTyping = ["INPUT", "TEXTAREA"].includes(document.activeElement.tagName);
+  if (event.key === "/" && !isTyping) {
+    event.preventDefault();
+    els.projectSearch.focus();
+    document.getElementById("work").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+/**
  * Wires up all static sections that don't depend on filter state:
  * hero stats, stack grid, log grid.
  */
@@ -89,6 +143,8 @@ function bindEvents() {
   els.navToggle.addEventListener("click", handleNavToggle);
   els.backToTop.addEventListener("click", handleBackToTopClick);
   window.addEventListener("scroll", handleScrollVisibility, { passive: true });
+  window.addEventListener("scroll", handleScrollProgress, { passive: true });
+  document.addEventListener("keydown", handleGlobalKeydown);
 
   // Close mobile nav after a link is tapped
   els.mainNav.querySelectorAll("a").forEach((a) =>
@@ -103,7 +159,9 @@ function init() {
   renderStaticSections();
   refreshProjectView();
   bindEvents();
+  initSectionReveal();
   handleScrollVisibility(); // in case the page loads mid-scroll (e.g. anchor link)
+  handleScrollProgress();
 }
 
 document.addEventListener("DOMContentLoaded", init);

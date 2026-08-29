@@ -5,10 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Biswash Rath — Backend Engineer</title>
 <meta name="description" content="Biswash Rath — Rust/Axum/PostgreSQL backend engineer. 2nd year CSE student building production-style backend systems.">
+
+<!-- Open Graph / social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Biswash Rath — Backend Engineer">
+<meta property="og:description" content="Rust/Axum/PostgreSQL backend engineer. Shipped IAM systems, a bytecode VM, and a full-stack game — not tutorials.">
+<meta property="og:image" content="assets/og-image.png">
+<meta property="og:url" content="https://biswashrath.dev/">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Biswash Rath — Backend Engineer">
+<meta name="twitter:description" content="Rust/Axum/PostgreSQL backend engineer. Shipped IAM systems, a bytecode VM, and a full-stack game — not tutorials.">
+<meta name="twitter:image" content="assets/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="alternate icon" href="assets/favicon.svg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Biswash Rath",
+  "jobTitle": "Backend Engineer",
+  "description": "2nd-year CS student specializing in Rust, Axum and PostgreSQL backend engineering.",
+  "url": "https://biswashrath.dev/",
+  "sameAs": [
+    "https://github.com/biswaskunu",
+    "https://linkedin.com/in/biswash-rath-25a871379"
+  ],
+  "knowsAbout": ["Rust", "Axum", "PostgreSQL", "SQLx", "Java", "Backend Engineering"]
+}
+</script>
 <script>
   /* Applied before first paint to avoid a flash of the wrong theme. */
   (function () {
@@ -23,6 +56,10 @@
 </script>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <div class="noise-overlay" aria-hidden="true"></div>
 
@@ -82,7 +119,7 @@
   </section>
 
   <!-- ===== WORK / FILTERABLE PROJECT INDEX (signature element) ===== -->
-  <section class="work" id="work">
+  <section class="work reveal" id="work">
     <div class="section-head">
       <p class="section-eyebrow">01 — Project index</p>
       <h2 class="section-title">Find a project by stack</h2>
@@ -92,7 +129,7 @@
     <div class="filter-bar" role="group" aria-label="Filter projects by technology">
       <div class="filter-search">
         <span class="filter-prompt">$ grep --stack</span>
-        <input type="text" id="projectSearch" placeholder="search projects…" autocomplete="off">
+        <input type="text" id="projectSearch" placeholder="search projects… (press / to focus)" autocomplete="off">
       </div>
       <div class="filter-chips" id="filterChips">
         <!-- populated by js/main.js -->
@@ -108,7 +145,7 @@
   </section>
 
   <!-- ===== STACK ===== -->
-  <section class="stack" id="stack">
+  <section class="stack reveal" id="stack">
     <div class="section-head">
       <p class="section-eyebrow">02 — Toolchain</p>
       <h2 class="section-title">What I build with</h2>
@@ -120,7 +157,7 @@
   </section>
 
   <!-- ===== LOG / HACKATHONS + VENTURES ===== -->
-  <section class="log" id="log">
+  <section class="log reveal" id="log">
     <div class="section-head">
       <p class="section-eyebrow">03 — Track record</p>
       <h2 class="section-title">Hackathons &amp; ventures</h2>
@@ -132,7 +169,7 @@
   </section>
 
   <!-- ===== THEME PICKER ===== -->
-  <section class="theme-section" id="theme">
+  <section class="theme-section reveal" id="theme">
     <div class="section-head">
       <p class="section-eyebrow">04 — Appearance</p>
       <h2 class="section-title">Make it yours</h2>
@@ -168,7 +205,7 @@
   </section>
 
   <!-- ===== CONTACT ===== -->
-  <section class="contact" id="contact">
+  <section class="contact reveal" id="contact">
     <div class="contact-inner">
       <h2 class="contact-title">Let's build<br>something real.</h2>
       <p class="contact-sub">Open to remote backend internships — GSoC, MLH Fellowship, Outreachy, or a YC-stage startup that needs someone who ships.</p>
