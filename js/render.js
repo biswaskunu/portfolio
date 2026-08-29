@@ -49,7 +49,7 @@ function renderProjectList(container, projects) {
   container.innerHTML = projects
     .map(
       (p) => `
-      <article class="project-card">
+      <article class="project-card" data-project-id="${p.id}">
         <div class="project-card-top">
           <div>
             <span class="project-status status-${p.status}">${statusLabel(p.status)}</span>
@@ -59,6 +59,7 @@ function renderProjectList(container, projects) {
           <a class="project-link" href="${p.url}" target="_blank" rel="noopener" aria-label="Open ${p.name} on GitHub">↗</a>
         </div>
         <p class="project-desc">${p.description}</p>
+        <div class="project-github-stats" data-stats-for="${p.id}" aria-live="polite"></div>
         <div class="project-footer">
           <div class="project-tags">
             ${p.tags
@@ -70,6 +71,30 @@ function renderProjectList(container, projects) {
       </article>`
     )
     .join("");
+}
+
+/**
+ * Patches a single project card's stats row once its GitHub data has
+ * resolved, rather than re-rendering the whole list (which would
+ * lose scroll position / hover state on every request that settles).
+ */
+function renderProjectStats(container, projectId, stats) {
+  const slot = container.querySelector(`[data-stats-for="${projectId}"]`);
+  if (!slot) return;
+
+  const bits = [
+    `<span class="gh-stat" title="Stars">★ ${stats.stars}</span>`,
+    `<span class="gh-stat" title="Forks">⑂ ${stats.forks}</span>`,
+  ];
+  if (stats.language) {
+    bits.push(`<span class="gh-stat gh-lang" title="Primary language">${stats.language}</span>`);
+  }
+  if (stats.pushedAt) {
+    bits.push(`<span class="gh-stat gh-pushed" title="Last commit">updated ${formatRelativeTime(stats.pushedAt)}</span>`);
+  }
+
+  slot.innerHTML = bits.join("");
+  slot.classList.add("stats-loaded");
 }
 
 function renderFilterCount(el, count, total) {

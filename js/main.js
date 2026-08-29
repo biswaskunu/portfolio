@@ -35,6 +35,67 @@ function refreshProjectView() {
   renderProjectList(els.projectList, filtered);
   renderFilterCount(els.filterCount, filtered.length, PROJECTS.length);
   renderFilterChips(els.filterChips, TAGS, appState.activeTags);
+  applyCachedStatsToVisibleCards(filtered);
+  attachTiltEffect(els.projectList.querySelectorAll(".project-card"));
+}
+
+/**
+ * After a re-render, any repo whose stats we already fetched this
+ * session should show immediately instead of waiting on a fresh
+ * network round-trip (fetchRepoStats itself also caches, but this
+ * skips even that lookup for instant paint on re-filter).
+ */
+function applyCachedStatsToVisibleCards(visibleProjects) {
+  visibleProjects.forEach((project) => {
+    const repoPath = parseRepoPath(project.url);
+    if (repoPath && githubStatsCache.has(repoPath)) {
+      const stats = githubStatsCache.get(repoPath);
+      if (stats) renderProjectStats(els.projectList, project.id, stats);
+    }
+  });
+}
+
+/**
+ * Kicks off GitHub stat fetches for every project once, on load.
+ * Each card patches itself in as its own request resolves.
+ */
+function loadGithubStatsOnce() {
+  loadAllRepoStats(PROJECTS, (project, stats) => {
+    renderProjectStats(els.projectList, project.id, stats);
+  });
+}
+
+/**
+ * Adds a subtle pointer-tracked 3D tilt to project cards on hover,
+ * skipped entirely for reduced-motion users or non-fine pointers
+ * (touch), where a tilt has no meaningful hover input anyway.
+ */
+function attachTiltEffect(cards) {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+  if (prefersReducedMotion || !hasFinePointer) return;
+
+  cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => handleCardTilt(e, card));
+    card.addEventListener("mouseleave", () => resetCardTilt(card));
+  });
+}
+
+function handleCardTilt(event, card) {
+  const rect = card.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  const rotateY = ((x - centerX) / centerX) * 4; // max ~4deg
+  const rotateX = ((centerY - y) / centerY) * 4;
+
+  card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+}
+
+function resetCardTilt(card) {
+  card.style.transform = "";
 }
 
 function handleChipClick(event) {
@@ -160,6 +221,7 @@ function init() {
   refreshProjectView();
   bindEvents();
   initSectionReveal();
+  loadGithubStatsOnce();
   handleScrollVisibility(); // in case the page loads mid-scroll (e.g. anchor link)
   handleScrollProgress();
 }
