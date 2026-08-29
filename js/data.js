@@ -105,6 +105,57 @@ const STACK = [
   { name: "Docker", role: "Local dev & deploy", detail: "Compose setups for local development; Railway + Netlify for shipped deployments." },
 ];
 
+/**
+ * Accent color options for the theme picker.
+ * Each option carries a dark-mode and light-mode variant so the
+ * accent stays legible and on-brand whichever base theme is active.
+ * `wash` is the low-opacity fill used behind chips/badges/glows.
+ */
+const ACCENTS = [
+  {
+    id: "teal",
+    label: "Teal",
+    swatch: "#14b8a6",
+    dark: { accent: "#14b8a6", soft: "#2dd4bf", wash: "rgba(20, 184, 166, 0.12)" },
+    light: { accent: "#0f9c8d", soft: "#0b7d71", wash: "rgba(15, 156, 141, 0.08)" },
+  },
+  {
+    id: "rust",
+    label: "Rust",
+    swatch: "#ce422b",
+    dark: { accent: "#ce422b", soft: "#e8734f", wash: "rgba(206, 66, 43, 0.12)" },
+    light: { accent: "#c33d21", soft: "#a83217", wash: "rgba(195, 61, 33, 0.08)" },
+  },
+  {
+    id: "indigo",
+    label: "Indigo",
+    swatch: "#6366f1",
+    dark: { accent: "#6366f1", soft: "#818cf8", wash: "rgba(99, 102, 241, 0.14)" },
+    light: { accent: "#4f46e5", soft: "#4338ca", wash: "rgba(79, 70, 229, 0.08)" },
+  },
+  {
+    id: "amber",
+    label: "Amber",
+    swatch: "#f59e0b",
+    dark: { accent: "#f59e0b", soft: "#fbbf24", wash: "rgba(245, 158, 11, 0.14)" },
+    light: { accent: "#d97706", soft: "#b45309", wash: "rgba(217, 119, 6, 0.08)" },
+  },
+  {
+    id: "rose",
+    label: "Rose",
+    swatch: "#f43f5e",
+    dark: { accent: "#f43f5e", soft: "#fb7185", wash: "rgba(244, 63, 94, 0.13)" },
+    light: { accent: "#e11d48", soft: "#be123c", wash: "rgba(225, 29, 72, 0.08)" },
+  },
+  {
+    id: "emerald",
+    label: "Emerald",
+    swatch: "#10b981",
+    dark: { accent: "#10b981", soft: "#34d399", wash: "rgba(16, 185, 129, 0.13)" },
+    light: { accent: "#059669", soft: "#047857", wash: "rgba(5, 150, 105, 0.08)" },
+  },
+];
+
 const LOG_ENTRIES = [
   {
     kind: "Hackathon",
@@ -130,5 +181,10 @@ const LOG_ENTRIES = [
     kind: "Content",
     title: "honest_developers_hub",
     detail: "Instagram channel on developer humor and programmer life — a creative outlet that doubles as a lead-gen channel.",
+  },
+  {
+    kind: "Venture",
+    title: "E-book publishing",
+    detail: "Created and sold content targeting underserved niches in the Indian/Asian market.",
   },
 ];
