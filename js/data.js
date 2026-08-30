@@ -7,7 +7,7 @@
 
 const HERO_STATS = [
   { value: "9.58", label: "Year‑1 CGPA" },
-  { value: "4", label: "Shipped repos" },
+  { value: "5", label: "Shipped repos" },
   { value: "3", label: "Hackathon teams led" },
   { value: "1", label: "Core stack, no context‑switching" },
 ];
@@ -84,15 +84,37 @@ const PROJECTS = [
     status: "shipped",
   },
   {
+    id: "kanban",
+    name: "Kanban",
+    tagline: "Drag-and-drop task board",
+    description:
+      "A personal Kanban board built in plain HTML/CSS/JS — Todo / In Progress / Done columns with native drag-and-drop between them and state persisted to localStorage, so your board survives a refresh.",
+    tags: ["cli"],
+    repo: "github.com/biswaskunu/kanban",
+    url: "https://github.com/biswaskunu/kanban",
+    status: "shipped",
+  },
+  {
+    id: "connected",
+    name: "ConnectEd",
+    tagline: "SIH 2026 — Digital Capacity Building & LMS Portal",
+    description:
+      "Smart India Hackathon 2026 project (SIH26075) for the Ministry of Earth Sciences: a Digital Capacity Building and Learning Management Portal with Trainee/Trainer/Admin roles, competency mapping to auto-match trainers to subjects, and a gamified 'student duels' MCQ mode as a stretch goal. Spec-first build — ARCHITECTURE.md, DESIGN.md and PRD.md written before code — with a Rust backend and separate frontend.",
+    tags: ["rust", "postgres", "auth"],
+    repo: "github.com/biswaskunu/ConnectEd",
+    url: "https://github.com/biswaskunu/ConnectEd",
+    status: "in-progress",
+  },
+  {
     id: "lookaway",
     name: "lookaway",
     tagline: "20-20-20 screen-break CLI",
     description:
-      "A lightweight, cross-platform CLI that reminds you to look 20 feet away for 20 seconds every 20 minutes. Built around notify-rust for OS-independent notifications rather than platform-specific code paths — spec is written, implementation in progress, versioned v0.1 → v1.0.",
+      "A lightweight, cross-platform CLI that reminds you to look 20 feet away for 20 seconds every 20 minutes. Built around notify-rust for OS-independent notifications rather than platform-specific code paths.",
     tags: ["rust", "cli"],
     repo: "github.com/biswaskunu/lookaway",
-    url: "https://github.com/biswaskunu",
-    status: "in-progress",
+    url: "https://github.com/biswaskunu/lookaway",
+    status: "shipped",
   },
 ];
 
