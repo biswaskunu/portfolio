@@ -1,246 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Biswash Rath — Backend Engineer</title>
-<meta name="description" content="Biswash Rath — Rust/Axum/PostgreSQL backend engineer. 2nd year CSE student building production-style backend systems.">
-
-<!-- Open Graph / social preview -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Biswash Rath — Backend Engineer">
-<meta property="og:description" content="Rust/Axum/PostgreSQL backend engineer. Shipped IAM systems, a bytecode VM, and a full-stack game — not tutorials.">
-<meta property="og:image" content="assets/og-image.png">
-<meta property="og:url" content="https://biswashrath.dev/">
-
-<!-- Twitter card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Biswash Rath — Backend Engineer">
-<meta name="twitter:description" content="Rust/Axum/PostgreSQL backend engineer. Shipped IAM systems, a bytecode VM, and a full-stack game — not tutorials.">
-<meta name="twitter:image" content="assets/og-image.png">
-
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="alternate icon" href="assets/favicon.svg">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Biswash Rath",
-  "jobTitle": "Backend Engineer",
-  "description": "2nd-year CS student specializing in Rust, Axum and PostgreSQL backend engineering.",
-  "url": "https://biswashrath.dev/",
-  "sameAs": [
-    "https://github.com/biswaskunu",
-    "https://linkedin.com/in/biswash-rath-25a871379"
-  ],
-  "knowsAbout": ["Rust", "Axum", "PostgreSQL", "SQLx", "Java", "Backend Engineering"]
-}
-</script>
-<script>
-  /* Applied before first paint to avoid a flash of the wrong theme. */
-  (function () {
-    try {
-      var saved = localStorage.getItem("theme");
-      var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      document.documentElement.setAttribute("data-theme", theme);
-    } catch (e) {
-      document.documentElement.setAttribute("data-theme", "dark");
-    }
-  })();
-</script>
-</head>
-<body>
-
-<a class="skip-link" href="#main-content">Skip to main content</a>
-
-<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
-<div class="noise-overlay" aria-hidden="true"></div>
-
-<!-- ===== NAV ===== -->
-<header class="site-header" id="top">
-  <div class="header-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark">&gt;_</span> biswash<span class="brand-dim">.rath</span>
-    </a>
-    <nav class="main-nav" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#stack">Stack</a>
-      <a href="#log">Log</a>
-      <a href="#theme">Theme</a>
-      <a href="#contact" class="nav-cta">Contact</a>
-    </nav>
-    <div class="header-actions">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
-        <span class="theme-toggle-track">
-          <span class="theme-toggle-thumb">
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.55 1.55M18.25 18.25l1.55 1.55M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.55-1.55M18.25 5.75l1.55-1.55" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          </span>
-        </span>
-      </button>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<main id="main-content">
-
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="hero-eyebrow"><span class="dot"></span> Bhubaneswar, India — open to remote internships</p>
-      <h1 class="hero-title">
-        Backend engineer<br>
-        who ships <span class="accent">systems</span>,<br>
-        not tutorials.
-      </h1>
-      <p class="hero-sub">
-        2nd‑year CS undergrad specializing in <strong>Rust / Axum / PostgreSQL</strong>.
-        I build the kind of backend infrastructure — auth chains, bytecode VMs, real‑time
-        game servers — that most students only read about.
-      </p>
-      <div class="hero-actions">
-        <a href="#work" class="btn btn-primary">View the work</a>
-        <a href="https://github.com/biswaskunu" target="_blank" rel="noopener" class="btn btn-ghost">github.com/biswaskunu</a>
-      </div>
-    </div>
-    <div class="hero-stats" id="heroStats">
-      <!-- populated by js/main.js -->
-    </div>
-  </section>
-
-  <!-- ===== WORK / FILTERABLE PROJECT INDEX (signature element) ===== -->
-  <section class="work reveal" id="work">
-    <div class="section-head">
-      <p class="section-eyebrow">01 — Project index</p>
-      <h2 class="section-title">Find a project by stack</h2>
-      <p class="section-desc">Every project below is a real, shipped repo — not a spec. Filter by the technology you care about.</p>
-    </div>
-
-    <div class="filter-bar" role="group" aria-label="Filter projects by technology">
-      <div class="filter-search">
-        <span class="filter-prompt">$ grep --stack</span>
-        <input type="text" id="projectSearch" placeholder="search projects… (press / to focus)" autocomplete="off">
-      </div>
-      <div class="filter-chips" id="filterChips">
-        <!-- populated by js/main.js -->
-      </div>
-      <button class="filter-clear" id="filterClear" type="button">Clear filters</button>
-    </div>
-
-    <p class="filter-count" id="filterCount" aria-live="polite">— open roles</p>
-
-    <div class="project-list" id="projectList">
-      <!-- populated by js/main.js -->
-    </div>
-  </section>
-
-  <!-- ===== STACK ===== -->
-  <section class="stack reveal" id="stack">
-    <div class="section-head">
-      <p class="section-eyebrow">02 — Toolchain</p>
-      <h2 class="section-title">What I build with</h2>
-      <p class="section-desc">Depth over breadth — one core stack, worked consistently across four shipped projects.</p>
-    </div>
-    <div class="stack-grid" id="stackGrid">
-      <!-- populated by js/main.js -->
-    </div>
-  </section>
-
-  <!-- ===== LOG / HACKATHONS + VENTURES ===== -->
-  <section class="log reveal" id="log">
-    <div class="section-head">
-      <p class="section-eyebrow">03 — Track record</p>
-      <h2 class="section-title">Hackathons &amp; ventures</h2>
-      <p class="section-desc">Competitive builds, plus the side projects that keep me shipping between semesters.</p>
-    </div>
-    <div class="log-grid" id="logGrid">
-      <!-- populated by js/main.js -->
-    </div>
-  </section>
-
-  <!-- ===== THEME PICKER ===== -->
-  <section class="theme-section reveal" id="theme">
-    <div class="section-head">
-      <p class="section-eyebrow">04 — Appearance</p>
-      <h2 class="section-title">Make it yours</h2>
-      <p class="section-desc">Pick a mode and an accent color. Both are saved, so it looks the same next time you're here.</p>
-    </div>
-
-    <div class="theme-panel">
-      <div class="theme-panel-row">
-        <div class="theme-panel-label">
-          <span class="theme-panel-title">Mode</span>
-          <span class="theme-panel-hint">Dark or light background</span>
-        </div>
-        <button class="theme-toggle theme-toggle-inline" id="themeToggleSection" type="button" aria-label="Switch to light mode" aria-pressed="false">
-          <span class="theme-toggle-track">
-            <span class="theme-toggle-thumb">
-              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.55 1.55M18.25 18.25l1.55 1.55M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.55-1.55M18.25 5.75l1.55-1.55" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.6 6.6 0 0 0 10.5 10.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </span>
-          </span>
-        </button>
-      </div>
-
-      <div class="theme-panel-row theme-panel-row-column">
-        <div class="theme-panel-label">
-          <span class="theme-panel-title">Accent color</span>
-          <span class="theme-panel-hint">Applied to links, buttons, tags &amp; highlights</span>
-        </div>
-        <div class="accent-swatches" id="accentSwatches" role="group" aria-label="Choose accent color">
-          <!-- populated by js/theme.js -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section class="contact reveal" id="contact">
-    <div class="contact-inner">
-      <h2 class="contact-title">Let's build<br>something real.</h2>
-      <p class="contact-sub">Open to remote backend internships — GSoC, MLH Fellowship, Outreachy, or a YC-stage startup that needs someone who ships.</p>
-      <div class="contact-links">
-        <a href="mailto:kunubiswas2@gmail.com" class="contact-link">
-          <span class="contact-label">Email</span>
-          <span class="contact-value">kunubiswas2@gmail.com</span>
-        </a>
-        <a href="https://github.com/biswaskunu" target="_blank" rel="noopener" class="contact-link">
-          <span class="contact-label">GitHub</span>
-          <span class="contact-value">github.com/biswaskunu</span>
-        </a>
-        <a href="https://linkedin.com/in/biswash-rath-25a871379" target="_blank" rel="noopener" class="contact-link">
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-value">biswash-rath-25a871379</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <p>&copy; 2026 Biswash Rath. Built with plain HTML, CSS &amp; JS — no framework, on purpose.</p>
-</footer>
-
-<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-</button>
-
-<script src="js/theme.js"></script>
-<script src="js/data.js"></script>
-<script src="js/filter.js"></script>
-<script src="js/github.js"></script>
-<script src="js/render.js"></script>
-<script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Biswash Rath — Backend Engineer</title>
+    <meta name="description" content="Biswash Rath — Rust/Axum/PostgreSQL backend engineer. 2nd year CSE student building production-style backend systems." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Biswash Rath — Backend Engineer" />
+    <meta property="og:description" content="Rust/Axum/PostgreSQL backend engineer. Shipped IAM systems, a bytecode VM, and a full-stack game — not tutorials." />
+    <meta name="theme-color" content="#181816" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
