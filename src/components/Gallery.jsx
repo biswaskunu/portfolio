@@ -6,8 +6,8 @@ import { GALLERY_ITEMS } from "../data/data.js";
  * Gallery
  * Horizontal accordion: a row of image panels where the active one
  * expands and the rest collapse to strips. Hover previews on desktop,
- * click/tap to pin (also covers touch + keyboard). Swap the placeholder
- * `image` URLs in GALLERY_ITEMS with files in `public/gallery/`.
+ * click/tap to pin (also covers touch + keyboard). Images come from
+ * `GALLERY_ITEMS` (files in `public/gallery/`).
  */
 export default function Gallery() {
   const [active, setActive] = useState(0);
@@ -19,8 +19,7 @@ export default function Gallery() {
         <h2 className="section-title">Screenshots &amp; moments</h2>
         <p className="section-desc">
           Project screenshots and achievement photos. Hover or tap a panel to
-          expand it — images are placeholders until real shots land in{" "}
-          <code>public/gallery/</code>.
+          expand it.
         </p>
       </AnimatedContent>
 

@@ -218,9 +218,8 @@ export const LOG_ENTRIES = [
 
 /**
  * GALLERY_ITEMS
- * Accordion Gallery content. `image` values are placeholders — drop your
- * own screenshots/photos into `public/gallery/` and swap the paths, e.g.
- * "/gallery/iam-dashboard.png". Recommended size: 1200×800 (3:2).
+ * Accordion Gallery content. Images live in `public/gallery/`.
+ * Recommended size: 1200×800 (3:2).
  */
 export const GALLERY_ITEMS = [
   {
@@ -229,7 +228,7 @@ export const GALLERY_ITEMS = [
     title: "History Guesser",
     detail: "GeoGuessr-style game — drop a map pin on historical photos, scored on accuracy.",
     repo: "github.com/biswaskunu/history-guesser",
-    image: "https://picsum.photos/seed/history-guesser/1200/800",
+    image: "/gallery/history-guesser.png",
   },
   {
     id: "advancing-rust",
@@ -237,7 +236,7 @@ export const GALLERY_ITEMS = [
     title: "Advancing with Rust",
     detail: "Summer internship course, Silicon University (25 May – 28 Jun 2026).",
     repo: "Silicon University · 2026",
-    image: "https://picsum.photos/seed/advancing-rust/1200/800",
+    image: "/gallery/rust-certificate.png",
   },
   {
     id: "sih-2026",
@@ -245,7 +244,7 @@ export const GALLERY_ITEMS = [
     title: "SIH 2026 · ChainDock",
     detail: "SIH26190 — tamper-evident document management for the Ministry of Home Affairs (NCRB).",
     repo: "github.com/biswaskunu/ChainDock",
-    image: "https://picsum.photos/seed/chaindock/1200/800",
+    image: "/gallery/chainDock.png",
   },
   {
     id: "odisha-boards",
@@ -253,7 +252,7 @@ export const GALLERY_ITEMS = [
     title: "12th in Odisha · Class 12 Boards",
     detail: "Award ceremony — ranked 12th in the Odisha Class 12 board examinations.",
     repo: "Odisha CHSE · Award ceremony",
-    image: "https://picsum.photos/seed/odisha-boards-award/1200/800",
+    image: "/gallery/12th-award.png",
   },
   {
     id: "lookaway",
@@ -261,6 +260,6 @@ export const GALLERY_ITEMS = [
     title: "lookaway",
     detail: "20-20-20 screen-break CLI — cross-platform Rust notifications.",
     repo: "github.com/biswaskunu/lookaway",
-    image: "https://picsum.photos/seed/lookaway-cli/1200/800",
+    image: "/gallery/lookaway.png",
   },
 ];
