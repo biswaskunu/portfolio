@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-// import { Renderer, Program, Mesh, Triangle } from 'ogl';
+import { Renderer, Program, Mesh, Triangle } from 'ogl';
 import './GradientWaves.css';
 
 const hexToRgb = hex => {
@@ -158,13 +158,21 @@ const GradientWaves = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({
-      webgl: 2,
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: false,
-      dpr: Math.min(window.devicePixelRatio || 1, 2)
-    });
+    let renderer;
+    try {
+      renderer = new Renderer({
+        webgl: 2,
+        alpha: true,
+        premultipliedAlpha: true,
+        antialias: false,
+        dpr: Math.min(window.devicePixelRatio || 1, 2)
+      });
+    } catch (err) {
+      // No WebGL (headless browser, blocked context, etc.) — render
+      // nothing instead of crashing the whole React tree to black.
+      console.warn("GradientWaves: WebGL unavailable, skipping backdrop.", err);
+      return;
+    }
 
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);

@@ -15,16 +15,29 @@ export default function Intro({ onFinish }) {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.body.style.overflow = "hidden";
 
+    // Safety net: never trap the user behind the overlay. If the fold
+    // animation (or its onComplete callback) fails for any reason,
+    // force-finish so the site is always revealed.
+    const failsafe = setTimeout(() => {
+      document.body.style.overflow = "";
+      onFinish();
+    }, 3500);
+
     if (prefersReducedMotion) {
       const t = setTimeout(() => {
+        clearTimeout(failsafe);
         document.body.style.overflow = "";
         onFinish();
       }, 300);
-      return () => clearTimeout(t);
+      return () => {
+        clearTimeout(t);
+        clearTimeout(failsafe);
+      };
     }
 
     return () => {
       document.body.style.overflow = "";
+      clearTimeout(failsafe);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -32,6 +45,12 @@ export default function Intro({ onFinish }) {
   function handleFoldComplete() {
     setPhase("hold");
     setTimeout(() => setPhase("out"), 450);
+    // If the CSS transitionend event never fires (e.g. transitions
+    // disabled), still unmount the overlay shortly after fading.
+    setTimeout(() => {
+      document.body.style.overflow = "";
+      onFinish();
+    }, 1500);
   }
 
   function handleTransitionEnd() {

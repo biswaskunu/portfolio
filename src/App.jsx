@@ -5,7 +5,7 @@ import Hero from "./components/Hero.jsx";
 import Work from "./components/Work.jsx";
 import Stack from "./components/Stack.jsx";
 import Log from "./components/Log.jsx";
-import Achievements from "./components/Achievements.jsx";
+import Gallery from "./components/Gallery.jsx";
 import ThemePanel from "./components/ThemePanel.jsx";
 import Contact, { Footer } from "./components/Contact.jsx";
 import { ScrollProgress, BackToTop } from "./components/ScrollChrome.jsx";
@@ -32,7 +32,7 @@ export default function App() {
         <Work />
         <Stack />
         <Log />
-        <Achievements />
+        <Gallery />
         <ThemePanel />
         <Contact />
       </main>

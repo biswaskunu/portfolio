@@ -169,8 +169,8 @@ export const ACCENTS = [
 export const LOG_ENTRIES = [
   {
     kind: "Hackathon",
-    title: "Smart India Hackathon 2025",
-    detail: "Built & pitched Coder's Hub with Team Aspire — a guided coding-learning platform with roadmaps and gamification (Problem Statement: Smart Education).",
+    title: "Smart India Hackathon 2026",
+    detail: "Building ConnectEd (SIH26075) for the Ministry of Earth Sciences — a Digital Capacity Building & Learning Management Portal with competency-mapped trainer matching.",
   },
   {
     kind: "Hackathon",
@@ -196,5 +196,54 @@ export const LOG_ENTRIES = [
     kind: "Venture",
     title: "E-book publishing",
     detail: "Created and sold content targeting underserved niches in the Indian/Asian market.",
+  },
+];
+
+/**
+ * GALLERY_ITEMS
+ * Accordion Gallery content. `image` values are placeholders — drop your
+ * own screenshots/photos into `public/gallery/` and swap the paths, e.g.
+ * "/gallery/iam-dashboard.png". Recommended size: 1200×800 (3:2).
+ */
+export const GALLERY_ITEMS = [
+  {
+    id: "history-guesser",
+    kind: "Project",
+    title: "History Guesser",
+    detail: "GeoGuessr-style game — drop a map pin on historical photos, scored on accuracy.",
+    repo: "github.com/biswaskunu/history-guesser",
+    image: "https://picsum.photos/seed/history-guesser/1200/800",
+  },
+  {
+    id: "advancing-rust",
+    kind: "Certification",
+    title: "Advancing with Rust",
+    detail: "Summer internship course, Silicon University (25 May – 28 Jun 2026).",
+    repo: "Silicon University · 2026",
+    image: "https://picsum.photos/seed/advancing-rust/1200/800",
+  },
+  {
+    id: "sih-2026",
+    kind: "Hackathon",
+    title: "SIH 2026 · ConnectEd",
+    detail: "SIH26075 — LMS portal for the Ministry of Earth Sciences.",
+    repo: "github.com/biswaskunu/ConnectEd",
+    image: "https://picsum.photos/seed/sih-2026-connected/1200/800",
+  },
+  {
+    id: "chaindock",
+    kind: "Project",
+    title: "ChainDock",
+    detail: "Secure digital document management for legal & investigation docs.",
+    repo: "github.com/biswaskunu/ChainDock",
+    image: "https://picsum.photos/seed/chaindock/1200/800",
+  },
+  {
+    id: "lookaway",
+    kind: "Project",
+    title: "lookaway",
+    detail: "20-20-20 screen-break CLI — cross-platform Rust notifications.",
+    repo: "github.com/biswaskunu/lookaway",
+    image: "https://picsum.photos/seed/lookaway-cli/1200/800",
   },
 ];

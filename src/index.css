@@ -326,8 +326,8 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
 .project-card:hover { border-color: var(--accent); box-shadow: 0 16px 32px -18px rgba(0,0,0,0.45); }
 
 /* Magic-Bento-style cursor-tracked border glow — subtle, no particles.
-   Radius reduced from the original 280px/220px to a tighter 160px/120px
-   so the glow stays close to the cursor instead of washing the whole card. */
+   Tight radius (90px/70px) so the glow hugs the cursor instead of
+   washing the whole card. Tweak these two pixel values to taste. */
 .magic-card::before {
   content: "";
   position: absolute;
@@ -335,7 +335,7 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
   padding: 1px;
   border-radius: inherit;
   background: radial-gradient(
-    160px circle at var(--glow-x) var(--glow-y),
+    90px circle at var(--glow-x) var(--glow-y),
     color-mix(in srgb, var(--accent) 70%, transparent) 0%,
     color-mix(in srgb, var(--accent) 25%, transparent) 35%,
     transparent 65%
@@ -354,7 +354,7 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(120px circle at var(--glow-x) var(--glow-y), var(--accent-wash), transparent 70%);
+  background: radial-gradient(70px circle at var(--glow-x) var(--glow-y), var(--accent-wash), transparent 70%);
   opacity: var(--glow-intensity);
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -422,12 +422,156 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
 
 .log { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .log-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.log-card { border: 1px solid var(--border); border-radius: 6px; padding: 1.4rem; background: var(--bg-card); }
-.log-kind { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-soft); }
+.log-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.4rem;
+  background: var(--bg-card);
+  transition: transform 0.4s var(--ease-spring), border-color 0.3s ease, box-shadow 0.35s ease;
+}
+/* Accent bar sweeps in from the left on hover. */
+.log-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+}
+.log-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent-wash);
+}
+.log-card:hover::before { transform: scaleX(1); }
+.log-kind { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-soft); transition: text-shadow 0.3s ease; }
+.log-card:hover .log-kind { text-shadow: 0 0 14px var(--accent-wash); }
 .log-title { font-family: var(--font-display); font-size: 1.05rem; margin: 0.5rem 0 0.5rem; }
 .log-detail { margin: 0; color: var(--text-dim); font-size: 0.87rem; }
 
 .gallery { background: var(--bg); }
+
+/* =========================================================
+   ACCORDION GALLERY — horizontal expanding image panels.
+   Swap placeholder URLs in GALLERY_ITEMS with real shots in
+   public/gallery/ (1200x800 recommended). Active panel grows
+   via flex-grow; the rest collapse to strips.
+========================================================= */
+.accordion-gallery {
+  display: flex;
+  gap: 0.75rem;
+  height: clamp(320px, 45vw, 440px);
+}
+.accordion-panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  background-color: var(--bg-card);
+  transition: flex-grow 0.6s var(--ease-out), border-color 0.3s ease, transform 0.3s ease, filter 0.4s ease;
+  text-align: left;
+  color: #fff;
+}
+/* Image on its own layer so the active panel can Ken-Burns zoom it. */
+.accordion-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--panel-image);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1);
+  transition: transform 5s ease;
+}
+.accordion-active::before { transform: scale(1.08); }
+.accordion-panel:not(.accordion-active) { filter: saturate(0.75) brightness(0.85); }
+.accordion-panel:hover { border-color: var(--accent-soft); }
+.accordion-active {
+  flex-grow: 3.6;
+  border-color: var(--accent);
+}
+.accordion-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.35) 100%);
+  transition: opacity 0.3s ease;
+}
+.accordion-strip {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 0.9rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  align-items: flex-start;
+  transition: opacity 0.25s ease;
+}
+.accordion-active .accordion-strip { opacity: 0; }
+.accordion-strip-kind {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-soft);
+}
+.accordion-strip-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; }
+.accordion-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.4rem;
+  white-space: nowrap;
+}
+/* Caption lines cascade in with stagger when a panel activates. */
+.accordion-caption > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.5s var(--ease-out);
+}
+.accordion-active .accordion-caption > *:nth-child(1) { transition-delay: 0.15s; }
+.accordion-active .accordion-caption > *:nth-child(2) { transition-delay: 0.23s; }
+.accordion-active .accordion-caption > *:nth-child(3) { transition-delay: 0.31s; }
+.accordion-active .accordion-caption > *:nth-child(4) { transition-delay: 0.39s; }
+.accordion-active .accordion-caption > * { opacity: 1; transform: translateY(0); }
+.accordion-kind {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-soft);
+}
+.accordion-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; }
+.accordion-detail { font-size: 0.88rem; color: rgba(255, 255, 255, 0.78); white-space: normal; max-width: 38ch; }
+.accordion-repo {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: normal;
+}
+
+@media (max-width: 720px) {
+  .accordion-gallery { flex-direction: column; height: auto; }
+  .accordion-panel { min-height: 76px; flex: none; }
+  .accordion-active { min-height: 300px; }
+  .accordion-strip { writing-mode: horizontal-tb; transform: none; flex-direction: row; align-items: baseline; gap: 0.7rem; }
+  .accordion-caption { white-space: normal; }
+}
 
 .contact-inner { text-align: left; }
 .contact-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.08; margin: 0 0 1.2rem; }
@@ -563,7 +707,7 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
   transition: opacity 0.4s ease;
   mix-blend-mode: screen;
   background: radial-gradient(
-    600px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+    320px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
     color-mix(in srgb, var(--accent) 16%, transparent) 0%,
     color-mix(in srgb, var(--accent) 6%, transparent) 35%,
     transparent 65%
