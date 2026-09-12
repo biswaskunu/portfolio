@@ -416,6 +416,10 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
 
 .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .stack-card { border: 1px solid var(--border); border-radius: 6px; padding: 1.5rem; background: var(--bg-card); }
+/* BorderGlow wrapper in the stack grid: StaggerItem stretches, glow card fills. */
+.stack-item { display: flex; }
+.stack-glow.stack-card { width: 100%; padding: 0; }
+.stack-glow .border-glow-inner { padding: 1.5rem; height: 100%; overflow: hidden; }
 .stack-name { font-family: var(--font-display); font-size: 1.15rem; margin: 0 0 0.2rem; color: var(--accent-soft); }
 .stack-role { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 0.8rem; }
 .stack-detail { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
