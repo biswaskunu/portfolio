@@ -514,3 +514,59 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
   section { padding: 3.5rem 1.25rem; }
   .back-to-top { right: 1rem; bottom: 1rem; width: 42px; height: 42px; }
 }
+
+/* =========================================================
+   INTRO — full-screen fold-in on first load
+========================================================= */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  --intro-text: var(--text);
+  transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+.intro-content { display: flex; align-items: center; justify-content: center; }
+.intro-fold-text { font-family: var(--font-mono); }
+
+.intro-in,
+.intro-hold {
+  opacity: 1;
+  visibility: visible;
+}
+.intro-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay { transition: none; }
+}
+
+/* =========================================================
+   GLOBAL CURSOR GLOW — Magic-Bento-style ambient light that
+   follows the pointer across the whole page.
+========================================================= */
+.global-cursor-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: screen;
+  background: radial-gradient(
+    600px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+    color-mix(in srgb, var(--accent) 16%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 6%, transparent) 35%,
+    transparent 65%
+  );
+}
+
+@media (pointer: coarse) {
+  .global-cursor-glow { display: none; }
+}
