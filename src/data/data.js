@@ -5,7 +5,7 @@
 
 export const HERO_STATS = [
   { value: "9.58", label: "Year‑1 CGPA" },
-  { value: "5", label: "Shipped repos" },
+  { value: "6", label: "Shipped repos" },
   { value: "3", label: "Hackathon teams led" },
   { value: "1", label: "Core stack, no context‑switching" },
 ];
@@ -22,6 +22,17 @@ export const TAGS = [
 ];
 
 export const PROJECTS = [
+  {
+    id: "chaindock",
+    name: "ChainDock",
+    tagline: "SIH 2026 — tamper-evident document management",
+    description:
+      "Smart India Hackathon 2026 project (SIH26190) for the Ministry of Home Affairs (NCRB / Women Safety Division), built as Team ASPIRE: a secure digital document management system for FIRs, charge sheets, witness statements and forensic reports. Core differentiator is provable tamper-evidence — a SHA-256 hash-chained audit log plus Ed25519 digital signatures on finalized documents. Rust/Axum/PostgreSQL backend with JWT rotation and 3 fixed roles (investigator / supervisor / admin).",
+    tags: ["rust", "axum", "postgres", "sqlx", "auth"],
+    repo: "github.com/biswaskunu/ChainDock",
+    url: "https://github.com/biswaskunu/ChainDock",
+    status: "in-progress",
+  },
   {
     id: "iam-platform",
     name: "IAM Platform",
@@ -89,17 +100,6 @@ export const PROJECTS = [
     status: "shipped",
   },
   {
-    id: "connected",
-    name: "ConnectEd",
-    tagline: "SIH 2026 — Digital Capacity Building & LMS Portal",
-    description:
-      "Smart India Hackathon 2026 project (SIH26075) for the Ministry of Earth Sciences: a Digital Capacity Building and Learning Management Portal with Trainee/Trainer/Admin roles, competency mapping to auto-match trainers to subjects, and a gamified 'student duels' MCQ mode as a stretch goal. Spec-first build — ARCHITECTURE.md, DESIGN.md and PRD.md written before code — with a Rust backend and separate frontend.",
-    tags: ["rust", "postgres", "auth"],
-    repo: "github.com/biswaskunu/ConnectEd",
-    url: "https://github.com/biswaskunu/ConnectEd",
-    status: "in-progress",
-  },
-  {
     id: "lookaway",
     name: "lookaway",
     tagline: "20-20-20 screen-break CLI",
@@ -109,6 +109,28 @@ export const PROJECTS = [
     repo: "github.com/biswaskunu/lookaway",
     url: "https://github.com/biswaskunu/lookaway",
     status: "shipped",
+  },
+  {
+    id: "git-stat-roaster",
+    name: "git-stat-roaster",
+    tagline: "GitHub stats → funny roast, as a web app",
+    description:
+      "Type in a GitHub username and get back public-stats-derived roasts. Rust/Axum JSON backend (paginated GitHub API fetch, derived stats, typed error responses) serving a React + Vite frontend from a single process — stateless lookup-and-respond, no database or auth.",
+    tags: ["rust", "axum", "react"],
+    repo: "github.com/biswaskunu/git-stat-roaster",
+    url: "https://github.com/biswaskunu/git-stat-roaster",
+    status: "in-progress",
+  },
+  {
+    id: "sherlock",
+    name: "sherlock",
+    tagline: "Local system monitor with spike correlation",
+    description:
+      "A local Rust agent that samples CPU, memory, disk I/O and per-process stats every few seconds, streams them live to a dashboard over SSE, and persists batches to Postgres via an Axum backend — so you can click a past resource spike and see exactly which process caused it.",
+    tags: ["rust", "postgres", "cli"],
+    repo: "github.com/biswaskunu/sherlock",
+    url: "https://github.com/biswaskunu/sherlock",
+    status: "in-progress",
   },
 ];
 
@@ -170,7 +192,7 @@ export const LOG_ENTRIES = [
   {
     kind: "Hackathon",
     title: "Smart India Hackathon 2026",
-    detail: "Building ConnectEd (SIH26075) for the Ministry of Earth Sciences — a Digital Capacity Building & Learning Management Portal with competency-mapped trainer matching.",
+    detail: "Building ChainDock (SIH26190) for the Ministry of Home Affairs — a tamper-evident digital document management system for legal & investigation records, with a hash-chained audit log and Ed25519 signatures.",
   },
   {
     kind: "Hackathon",
@@ -191,11 +213,6 @@ export const LOG_ENTRIES = [
     kind: "Content",
     title: "honest_developers_hub",
     detail: "Instagram channel on developer humor and programmer life — a creative outlet that doubles as a lead-gen channel.",
-  },
-  {
-    kind: "Venture",
-    title: "E-book publishing",
-    detail: "Created and sold content targeting underserved niches in the Indian/Asian market.",
   },
 ];
 
@@ -225,18 +242,18 @@ export const GALLERY_ITEMS = [
   {
     id: "sih-2026",
     kind: "Hackathon",
-    title: "SIH 2026 · ConnectEd",
-    detail: "SIH26075 — LMS portal for the Ministry of Earth Sciences.",
-    repo: "github.com/biswaskunu/ConnectEd",
-    image: "https://picsum.photos/seed/sih-2026-connected/1200/800",
-  },
-  {
-    id: "chaindock",
-    kind: "Project",
-    title: "ChainDock",
-    detail: "Secure digital document management for legal & investigation docs.",
+    title: "SIH 2026 · ChainDock",
+    detail: "SIH26190 — tamper-evident document management for the Ministry of Home Affairs (NCRB).",
     repo: "github.com/biswaskunu/ChainDock",
     image: "https://picsum.photos/seed/chaindock/1200/800",
+  },
+  {
+    id: "odisha-boards",
+    kind: "Award",
+    title: "12th in Odisha · Class 12 Boards",
+    detail: "Award ceremony — ranked 12th in the Odisha Class 12 board examinations.",
+    repo: "Odisha CHSE · Award ceremony",
+    image: "https://picsum.photos/seed/odisha-boards-award/1200/800",
   },
   {
     id: "lookaway",
