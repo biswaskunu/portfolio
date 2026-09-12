@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { useTheme } from "../hooks/useTheme.jsx";
+import PillNav from "./../fx/PillNav.jsx";
 
 function ThemeToggle({ inline = false }) {
   const { mode, toggleMode } = useTheme();
@@ -39,37 +39,31 @@ function ThemeToggle({ inline = false }) {
 
 export { ThemeToggle };
 
+const NAV_ITEMS = [
+  { label: "Work", href: "#work" },
+  { label: "Stack", href: "#stack" },
+  { label: "Log", href: "#log" },
+  { label: "Gallery", href: "#gallery" },
+  { label: "Theme", href: "#theme" },
+  { label: "Contact", href: "#contact" },
+];
+
 export default function Header() {
-  const [navOpen, setNavOpen] = useState(false);
-
-  const closeNav = () => setNavOpen(false);
-
   return (
     <header className="site-header" id="top">
       <div className="header-inner">
-        <a className="brand" href="#top">
-          <span className="brand-mark">&gt;_</span> biswash<span className="brand-dim">.rath</span>
-        </a>
-        <nav className={`main-nav ${navOpen ? "nav-open" : ""}`} aria-label="Primary">
-          <a href="#work" onClick={closeNav}>Work</a>
-          <a href="#stack" onClick={closeNav}>Stack</a>
-          <a href="#log" onClick={closeNav}>Log</a>
-          <a href="#theme" onClick={closeNav}>Theme</a>
-          <a href="#contact" className="nav-cta" onClick={closeNav}>Contact</a>
-        </nav>
+        <PillNav
+          logo="/favicon.svg"
+          logoAlt="Biswash Rath"
+          items={NAV_ITEMS}
+          baseColor="var(--bg-card)"
+          pillColor="var(--accent)"
+          hoveredPillTextColor="var(--text)"
+          pillTextColor="#181816"
+          ease="power3.out"
+        />
         <div className="header-actions">
           <ThemeToggle />
-          <button
-            className="nav-toggle"
-            type="button"
-            aria-label="Toggle menu"
-            aria-expanded={navOpen}
-            onClick={() => setNavOpen((v) => !v)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
       </div>
     </header>

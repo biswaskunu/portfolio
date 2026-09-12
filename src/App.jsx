@@ -5,11 +5,13 @@ import Hero from "./components/Hero.jsx";
 import Work from "./components/Work.jsx";
 import Stack from "./components/Stack.jsx";
 import Log from "./components/Log.jsx";
+import Achievements from "./components/Achievements.jsx";
 import ThemePanel from "./components/ThemePanel.jsx";
 import Contact, { Footer } from "./components/Contact.jsx";
 import { ScrollProgress, BackToTop } from "./components/ScrollChrome.jsx";
 import Intro from "./components/Intro.jsx";
 import GlobalCursorGlow from "./fx/GlobalCursorGlow.jsx";
+import GradientWaves from "./fx/GradientWaves.jsx";
 
 export default function App() {
   const [introDone, setIntroDone] = useState(false);
@@ -19,6 +21,7 @@ export default function App() {
       {!introDone && <Intro onFinish={() => setIntroDone(true)} />}
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <ScrollProgress />
+      <GradientWaves className="gradient-waves-backdrop" />
       <GlobalCursorGlow />
       <div className="noise-overlay" aria-hidden="true"></div>
 
@@ -29,6 +32,7 @@ export default function App() {
         <Work />
         <Stack />
         <Log />
+        <Achievements />
         <ThemePanel />
         <Contact />
       </main>

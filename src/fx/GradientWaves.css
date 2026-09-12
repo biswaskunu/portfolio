@@ -1,0 +1,18 @@
+.gradient-waves-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Fixed full-viewport backdrop, sits behind all page content. */
+.gradient-waves-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-waves-backdrop { opacity: 0.6; }
+}

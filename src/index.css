@@ -189,7 +189,6 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
 }
 .theme-toggle-thumb svg { width: 13px; height: 13px; }
 .icon-moon { display: none; }
-:root[data-theme="light"] .theme-toggle-thumb { transform: translateX(20px); }
 :root[data-theme="dark"] .icon-sun { display: block; }
 :root[data-theme="dark"] .icon-moon { display: none; }
 :root[data-theme="light"] .icon-sun { display: none; }
@@ -326,7 +325,9 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
 }
 .project-card:hover { border-color: var(--accent); box-shadow: 0 16px 32px -18px rgba(0,0,0,0.45); }
 
-/* Magic-Bento-style cursor-tracked border glow — subtle, no particles. */
+/* Magic-Bento-style cursor-tracked border glow — subtle, no particles.
+   Radius reduced from the original 280px/220px to a tighter 160px/120px
+   so the glow stays close to the cursor instead of washing the whole card. */
 .magic-card::before {
   content: "";
   position: absolute;
@@ -334,7 +335,7 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
   padding: 1px;
   border-radius: inherit;
   background: radial-gradient(
-    280px circle at var(--glow-x) var(--glow-y),
+    160px circle at var(--glow-x) var(--glow-y),
     color-mix(in srgb, var(--accent) 70%, transparent) 0%,
     color-mix(in srgb, var(--accent) 25%, transparent) 35%,
     transparent 65%
@@ -353,7 +354,7 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(220px circle at var(--glow-x) var(--glow-y), var(--accent-wash), transparent 70%);
+  background: radial-gradient(120px circle at var(--glow-x) var(--glow-y), var(--accent-wash), transparent 70%);
   opacity: var(--glow-intensity);
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -425,6 +426,8 @@ section { padding: 5.5rem 1.5rem; max-width: var(--container); margin: 0 auto; }
 .log-kind { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-soft); }
 .log-title { font-family: var(--font-display); font-size: 1.05rem; margin: 0.5rem 0 0.5rem; }
 .log-detail { margin: 0; color: var(--text-dim); font-size: 0.87rem; }
+
+.gallery { background: var(--bg); }
 
 .contact-inner { text-align: left; }
 .contact-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.08; margin: 0 0 1.2rem; }
