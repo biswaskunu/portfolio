@@ -11,7 +11,6 @@ import ThemePanel from "./components/ThemePanel.jsx";
 import Contact, { Footer } from "./components/Contact.jsx";
 import { ScrollProgress, BackToTop } from "./components/ScrollChrome.jsx";
 import Intro from "./components/Intro.jsx";
-import GlobalCursorGlow from "./fx/GlobalCursorGlow.jsx";
 import GradientWaves from "./fx/GradientWaves.jsx";
 
 function ThemedBackdrop() {
@@ -37,14 +36,13 @@ function ThemedBackdrop() {
         height={6.0}
         fogDepth={15}
         detail="medium"
-        brightness={mode === "light" ? 0.85 : 0.55}
-        opacity={mode === "light" ? 0.45 : 0.6}
+        brightness={mode === "light" ? 0.9 : 0.75}
+        opacity={mode === "light" ? 0.7 : 0.85}
         mouseInteraction
         parallaxStrength={0.35}
-        grain
-        grainIntensity={0.035}
+        grain={false}
+        grainIntensity={0}
       />
-      <div className="backdrop-scrim" aria-hidden="true" />
     </>
   );
 }
@@ -58,8 +56,6 @@ export default function App() {
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <ScrollProgress />
       <ThemedBackdrop />
-      <GlobalCursorGlow />
-      <div className="noise-overlay" aria-hidden="true"></div>
 
       <Header />
 
