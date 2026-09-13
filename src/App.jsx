@@ -12,6 +12,7 @@ import Contact, { Footer } from "./components/Contact.jsx";
 import { ScrollProgress, BackToTop } from "./components/ScrollChrome.jsx";
 import Intro from "./components/Intro.jsx";
 import GradientWaves from "./fx/GradientWaves.jsx";
+import ClickSpark from "./fx/ClickSpark.jsx";
 
 function ThemedBackdrop() {
   const { mode, accentId } = useTheme();
@@ -56,6 +57,7 @@ export default function App() {
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <ScrollProgress />
       <ThemedBackdrop />
+      <ClickSpark />
 
       <Header />
 
