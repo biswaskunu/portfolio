@@ -27,7 +27,12 @@ export default function Stack() {
   const { mode, accentId } = useTheme();
   const accent = ACCENTS.find((a) => a.id === accentId) || ACCENTS[0];
   const variant = mode === "light" ? accent.light : accent.dark;
-  const backgroundColor = mode === "light" ? "#ffffff" : "#232220";
+  // Translucent so the fixed GradientWaves backdrop stays visible.
+  // color-mix keeps the card tinted but lets the shader glow through.
+  const backgroundColor =
+    mode === "light"
+      ? "color-mix(in srgb, #ffffff 68%, transparent)"
+      : "color-mix(in srgb, #232220 68%, transparent)";
   const glowColors = [accent.swatch, variant.soft, variant.accent];
   const glowColor = hexToHslString(variant.soft);
 
@@ -48,7 +53,7 @@ export default function Stack() {
               backgroundColor={backgroundColor}
               colors={glowColors}
               glowColor={glowColor}
-              borderRadius={6}
+              borderRadius={10}
               glowRadius={24}
               edgeSensitivity={30}
               coneSpread={25}

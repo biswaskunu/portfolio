@@ -5,14 +5,51 @@
   overflow: hidden;
 }
 
-/* Fixed full-viewport backdrop, sits behind all page content. */
+/* Fixed full-viewport backdrop, sits behind all page content.
+   z-index 0 + content at z-index 1 guarantees the shader stays
+   visible even with a solid <html> base color. pointer-events none
+   so mouse tracking lives on window (see GradientWaves.jsx). */
 .gradient-waves-backdrop {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
 }
 
+.gradient-waves-backdrop canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Readability scrim above the shader, below content. Subtle vertical
+   gradient so text stays legible without hiding the waves. */
+.backdrop-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.22), transparent 22%, transparent 62%, rgba(0, 0, 0, 0.28)),
+    radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(0, 0, 0, 0.18) 100%);
+}
+
+:root[data-theme="light"] .backdrop-scrim {
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 26%, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0.5)),
+    radial-gradient(120% 90% at 50% 0%, transparent 55%, rgba(255, 255, 255, 0.35) 100%);
+}
+
+/* Content must paint above the fixed backdrop. */
+.site-header,
+#main-content,
+.site-footer,
+.scroll-progress,
+.back-to-top {
+  position: relative;
+  z-index: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .gradient-waves-backdrop { opacity: 0.6; }
+  .gradient-waves-backdrop { opacity: 0.7; }
 }

@@ -42,9 +42,13 @@ function buildGradientVars(colors) {
 }
 
 function isLightColor(color) {
-  const value = color.trim().replace('#', '');
-  if (!/^[\da-f]{3}([\da-f]{3})?$/i.test(value)) return false;
-  const hex = value.length === 3 ? value.split('').map(char => char + char).join('') : value;
+  const value = color.trim();
+  // Translucent color-mix() surfaces: infer from the base hex inside.
+  if (value.includes('255, 255, 255') || value.includes('#ffffff') || value.includes('#faf8f4')) return true;
+  if (value.includes('35, 34, 32') || value.includes('#232220') || value.includes('#181816')) return false;
+  const hexMatch = value.replace('#', '');
+  if (!/^[\da-f]{3}([\da-f]{3})?$/i.test(hexMatch)) return false;
+  const hex = hexMatch.length === 3 ? hexMatch.split('').map(char => char + char).join('') : hexMatch;
   const red = parseInt(hex.slice(0, 2), 16);
   const green = parseInt(hex.slice(2, 4), 16);
   const blue = parseInt(hex.slice(4, 6), 16);

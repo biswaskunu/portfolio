@@ -153,10 +153,23 @@ const GradientWaves = ({
 }) => {
   const containerRef = useRef(null);
   const enableMouseRef = useRef(mouseInteraction);
+  // Keep latest prop values for the one-time WebGL init (effect runs once,
+  // second effect below keeps uniforms in sync afterwards).
+  const propsRef = useRef({
+    speed, amplitude, waveScale, waveRatio, swell, turbulence, tilt, zoom,
+    height, fogDepth, detail, brightness, opacity, grain, grainIntensity,
+    mouseInteraction, parallaxStrength, horizonColor, waveColor, crestColor,
+  });
+  propsRef.current = {
+    speed, amplitude, waveScale, waveRatio, swell, turbulence, tilt, zoom,
+    height, fogDepth, detail, brightness, opacity, grain, grainIntensity,
+    mouseInteraction, parallaxStrength, horizonColor, waveColor, crestColor,
+  };
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    const initial = propsRef.current;
 
     let renderer;
     try {
@@ -183,33 +196,36 @@ const GradientWaves = ({
     container.appendChild(canvas);
 
     const geometry = new Triangle(gl);
+    const h0 = hexToRgb(initial.horizonColor);
+    const w0 = hexToRgb(initial.waveColor);
+    const c0 = hexToRgb(initial.crestColor);
     const program = new Program(gl, {
       vertex,
       fragment,
       uniforms: {
         iTime: { value: 0 },
         iResolution: { value: new Float32Array([1, 1]) },
-        uSpeed: { value: 0.4 },
-        uAmplitude: { value: 2.5 },
-        uWaveScale: { value: 0.6 },
-        uWaveRatio: { value: 0.9 },
-        uSwell: { value: 35 },
-        uTurbulence: { value: 20 },
-        uTilt: { value: 1.11 },
-        uZoom: { value: 1.0 },
-        uHeight: { value: 5.5 },
-        uFogDepth: { value: 15 },
-        uSteps: { value: 70.0 },
-        uBrightness: { value: 1.0 },
-        uOpacity: { value: 1.0 },
-        uGrain: { value: 1.0 },
-        uGrainIntensity: { value: 0.05 },
+        uSpeed: { value: initial.speed },
+        uAmplitude: { value: initial.amplitude },
+        uWaveScale: { value: initial.waveScale },
+        uWaveRatio: { value: initial.waveRatio },
+        uSwell: { value: initial.swell },
+        uTurbulence: { value: initial.turbulence },
+        uTilt: { value: initial.tilt },
+        uZoom: { value: initial.zoom },
+        uHeight: { value: initial.height },
+        uFogDepth: { value: initial.fogDepth },
+        uSteps: { value: detailToSteps(initial.detail) },
+        uBrightness: { value: initial.brightness },
+        uOpacity: { value: initial.opacity },
+        uGrain: { value: initial.grain ? 1.0 : 0.0 },
+        uGrainIntensity: { value: initial.grainIntensity },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
-        uParallax: { value: 0.5 },
-        uEnableMouse: { value: true },
-        uHorizonColor: { value: new Float32Array([1, 1, 1]) },
-        uWaveColor: { value: new Float32Array([1, 1, 1]) },
-        uCrestColor: { value: new Float32Array([1, 1, 1]) }
+        uParallax: { value: initial.parallaxStrength },
+        uEnableMouse: { value: initial.mouseInteraction },
+        uHorizonColor: { value: new Float32Array(h0) },
+        uWaveColor: { value: new Float32Array(w0) },
+        uCrestColor: { value: new Float32Array(c0) }
       }
     });
 
@@ -234,17 +250,21 @@ const GradientWaves = ({
     const currentMouse = [0.5, 0.5];
     const targetMouse = [0.5, 0.5];
 
+    // Backdrop has pointer-events:none, so listen on window and map the
+    // cursor to 0..1 UV space. Matches the shader's expectation
+    // (y flipped to GL coords).
     const onPointerMove = e => {
-      const rect = canvas.getBoundingClientRect();
-      targetMouse[0] = (e.clientX - rect.left) / rect.width;
-      targetMouse[1] = 1.0 - (e.clientY - rect.top) / rect.height;
+      const w = window.innerWidth || 1;
+      const h = window.innerHeight || 1;
+      targetMouse[0] = Math.min(Math.max(e.clientX / w, 0), 1);
+      targetMouse[1] = 1.0 - Math.min(Math.max(e.clientY / h, 0), 1);
     };
     const onPointerLeave = () => {
       targetMouse[0] = 0.5;
       targetMouse[1] = 0.5;
     };
-    canvas.addEventListener('pointermove', onPointerMove);
-    canvas.addEventListener('pointerleave', onPointerLeave);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    document.documentElement.addEventListener('pointerleave', onPointerLeave);
 
     let raf = 0;
     let isVisible = true;
@@ -301,8 +321,8 @@ const GradientWaves = ({
       ro.disconnect();
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
-      canvas.removeEventListener('pointermove', onPointerMove);
-      canvas.removeEventListener('pointerleave', onPointerLeave);
+      window.removeEventListener('pointermove', onPointerMove);
+      document.documentElement.removeEventListener('pointerleave', onPointerLeave);
       ctxMap.delete(container);
       try {
         container.removeChild(canvas);
