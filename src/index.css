@@ -201,11 +201,21 @@ section:first-of-type { border-top: none; }
   transition: transform 0.4s var(--ease-spring), background 0.3s ease;
 }
 .theme-toggle-thumb svg { width: 13px; height: 13px; }
-.icon-moon { display: none; }
-:root[data-theme="dark"] .icon-sun { display: block; }
-:root[data-theme="dark"] .icon-moon { display: none; }
-:root[data-theme="light"] .icon-sun { display: none; }
-:root[data-theme="light"] .icon-moon { display: block; }
+/* Header toggle slide — was missing, so only the inline (ThemePanel)
+   variant animated. Track 46px − thumb 20px − padding/border = 20px. */
+:root[data-theme="light"] .theme-toggle-thumb { transform: translateX(20px); }
+/* Icon crossfade instead of display swap, so sun/moon morph smoothly. */
+.theme-toggle-thumb { position: relative; }
+.theme-toggle-thumb svg {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: opacity 0.3s ease, transform 0.4s var(--ease-spring);
+}
+:root[data-theme="dark"] .icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
+:root[data-theme="dark"] .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+:root[data-theme="light"] .icon-sun { opacity: 0; transform: rotate(90deg) scale(0.5); }
+:root[data-theme="light"] .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
 .theme-toggle:hover .theme-toggle-track { border-color: var(--accent-soft); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; }
