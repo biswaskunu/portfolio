@@ -5,7 +5,7 @@
 
 export const HERO_STATS = [
   { value: "9.58", label: "Year‑1 CGPA" },
-  { value: "6", label: "Shipped repos" },
+  { value: "7", label: "Shipped repos" },
   { value: "3", label: "Hackathon teams led" },
   { value: "1", label: "Core stack, no context‑switching" },
 ];
@@ -22,17 +22,6 @@ export const TAGS = [
 ];
 
 export const PROJECTS = [
-  {
-    id: "chaindock",
-    name: "ChainDock",
-    tagline: "SIH 2026 — tamper-evident document management",
-    description:
-      "Smart India Hackathon 2026 project (SIH26190) for the Ministry of Home Affairs (NCRB / Women Safety Division), built as Team ASPIRE: a secure digital document management system for FIRs, charge sheets, witness statements and forensic reports. Core differentiator is provable tamper-evidence — a SHA-256 hash-chained audit log plus Ed25519 digital signatures on finalized documents. Rust/Axum/PostgreSQL backend with JWT rotation and 3 fixed roles (investigator / supervisor / admin).",
-    tags: ["rust", "axum", "postgres", "sqlx", "auth"],
-    repo: "github.com/biswaskunu/ChainDock",
-    url: "https://github.com/biswaskunu/ChainDock",
-    status: "in-progress",
-  },
   {
     id: "iam-platform",
     name: "IAM Platform",
@@ -54,6 +43,28 @@ export const PROJECTS = [
     repo: "github.com/biswaskunu/history-guesser",
     url: "https://github.com/biswaskunu/history-guesser",
     status: "shipped",
+  },
+  {
+    id: "sherlock",
+    name: "sherlock",
+    tagline: "Local system monitor with spike correlation",
+    description:
+      "A local Rust agent that samples CPU, memory, disk I/O and per-process stats every few seconds, streams them live to a dashboard over SSE, and persists batches to Postgres via an Axum backend — so you can click a past resource spike and see exactly which process caused it.",
+    tags: ["rust", "postgres", "cli"],
+    repo: "github.com/biswaskunu/sherlock",
+    url: "https://github.com/biswaskunu/sherlock",
+    status: "shipped",
+  },
+  {
+    id: "chaindock",
+    name: "ChainDock",
+    tagline: "SIH 2026 — tamper-evident document management",
+    description:
+      "Smart India Hackathon 2026 project (SIH26190) for the Ministry of Home Affairs (NCRB / Women Safety Division), built as Team ASPIRE: a secure digital document management system for FIRs, charge sheets, witness statements and forensic reports. Core differentiator is provable tamper-evidence — a SHA-256 hash-chained audit log plus Ed25519 digital signatures on finalized documents. Rust/Axum/PostgreSQL backend with JWT rotation and 3 fixed roles (investigator / supervisor / admin).",
+    tags: ["rust", "axum", "postgres", "sqlx", "auth"],
+    repo: "github.com/biswaskunu/ChainDock",
+    url: "https://github.com/biswaskunu/ChainDock",
+    status: "in-progress",
   },
   {
     id: "minivm",
@@ -119,17 +130,6 @@ export const PROJECTS = [
     tags: ["rust", "axum", "react"],
     repo: "github.com/biswaskunu/git-stat-roaster",
     url: "https://github.com/biswaskunu/git-stat-roaster",
-    status: "in-progress",
-  },
-  {
-    id: "sherlock",
-    name: "sherlock",
-    tagline: "Local system monitor with spike correlation",
-    description:
-      "A local Rust agent that samples CPU, memory, disk I/O and per-process stats every few seconds, streams them live to a dashboard over SSE, and persists batches to Postgres via an Axum backend — so you can click a past resource spike and see exactly which process caused it.",
-    tags: ["rust", "postgres", "cli"],
-    repo: "github.com/biswaskunu/sherlock",
-    url: "https://github.com/biswaskunu/sherlock",
     status: "in-progress",
   },
 ];
@@ -208,11 +208,6 @@ export const LOG_ENTRIES = [
     kind: "Certification",
     title: "Advancing with Rust",
     detail: "Summer internship course, Silicon University (25 May – 28 Jun 2026).",
-  },
-  {
-    kind: "Content",
-    title: "honest_developers_hub",
-    detail: "Instagram channel on developer humor and programmer life — a creative outlet that doubles as a lead-gen channel.",
   },
 ];
 
