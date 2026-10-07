@@ -97,8 +97,8 @@ export default function Work() {
         </div>
       ) : (
         <StaggerGroup className="project-list">
-          {filtered.map((p) => (
-            <ProjectCard key={p.id} project={p} stats={statsById[p.id]} />
+          {filtered.map((p, i) => (
+            <ProjectCard key={p.id} project={p} stats={statsById[p.id]} index={i} />
           ))}
         </StaggerGroup>
       )}
