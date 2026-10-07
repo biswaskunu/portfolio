@@ -24,12 +24,13 @@
 
 /* Content must paint above the fixed backdrop. No scrims, blends, or
    filters here — the shader renders raw so the custom background
-   stays fully visible. */
-.site-header,
+   stays fully visible.
+   Only static containers need the relative/z-index lift: anything
+   already fixed or sticky (.site-header, .scroll-progress,
+   .back-to-top) is positioned with its own high z-index, and forcing
+   `position: relative` here would silently break it. */
 #main-content,
-.site-footer,
-.scroll-progress,
-.back-to-top {
+.site-footer {
   position: relative;
   z-index: 1;
 }

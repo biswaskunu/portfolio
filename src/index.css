@@ -55,6 +55,16 @@ html {
   /* Solid base under the fixed shader. Body and all sections stay
      transparent so the waves remain visible. */
   background: var(--bg);
+  /* Native scrollbar removed entirely — scroll position is already
+     communicated by the fixed .scroll-progress bar. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 #root { min-height: 100vh; background: transparent; }
 
