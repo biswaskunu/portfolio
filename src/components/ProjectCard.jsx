@@ -47,9 +47,10 @@ function ChevronIcon() {
 /**
  * ProjectCard
  * Full-width horizontal row: project name on the left, GitHub link +
- * star/fork counters as icon pills on the right. Clicking the row
+ * star/fork counters as icon pills on the right. Hovering the row
  * expands it vertically (ease-out height animation) to reveal the
- * description, live language / last-commit stats and the tag list.
+ * description, live language / last-commit stats and the tag list;
+ * leaving the row collapses it again — no sticky open state.
  * Keeps the section's existing border-glow treatment.
  */
 export default function ProjectCard({ project, stats, index }) {
@@ -57,7 +58,6 @@ export default function ProjectCard({ project, stats, index }) {
   const [open, setOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
-  const panelId = `project-panel-${project.id}`;
   const loaded = Boolean(stats);
 
   const panelTransition = reduceMotion
@@ -66,6 +66,15 @@ export default function ProjectCard({ project, stats, index }) {
         height: { duration: 0.5, ease: EASE },
         opacity: { duration: 0.35, ease: EASE, delay: open ? 0.14 : 0 },
       };
+
+  function handleMouseEnter() {
+    setOpen(true);
+    const node = ref.current;
+    if (!node) return;
+    node.style.setProperty("--glow-x", "50%");
+    node.style.setProperty("--glow-y", "50%");
+    node.style.setProperty("--glow-intensity", "1");
+  }
 
   function handleMouseMove(e) {
     if (!ref.current) return;
@@ -76,6 +85,7 @@ export default function ProjectCard({ project, stats, index }) {
   }
 
   function handleMouseLeave() {
+    setOpen(false);
     ref.current?.style.setProperty("--glow-intensity", "0");
   }
 
@@ -85,17 +95,12 @@ export default function ProjectCard({ project, stats, index }) {
         ref={ref}
         className={`project-card magic-card ${open ? "is-open" : ""}`}
         data-project-id={project.id}
+        onMouseEnter={handleMouseEnter}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
         <div className="project-row">
-          <button
-            type="button"
-            className="project-row-main"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls={panelId}
-          >
+          <div className="project-row-main">
             {typeof index === "number" && (
               <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
             )}
@@ -103,7 +108,7 @@ export default function ProjectCard({ project, stats, index }) {
               <span className="project-name">{project.name}</span>
               <span className="project-tagline">{project.tagline}</span>
             </span>
-          </button>
+          </div>
 
           <div className="project-meta">
             <span className={`project-icon-stat ${loaded ? "stats-loaded" : ""}`} title="Stars">
@@ -123,24 +128,14 @@ export default function ProjectCard({ project, stats, index }) {
             >
               <GitHubIcon />
             </a>
-            <button
-              type="button"
-              className="project-chevron"
-              onClick={() => setOpen((v) => !v)}
-              aria-expanded={open}
-              aria-controls={panelId}
-              aria-label={`${open ? "Collapse" : "Expand"} ${project.name}`}
-              tabIndex={-1}
-            >
+            <span className="project-chevron" aria-hidden="true">
               <ChevronIcon />
-            </button>
+            </span>
           </div>
         </div>
 
         <motion.div
           className="project-panel"
-          id={panelId}
-          aria-hidden={!open}
           initial={false}
           animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
           transition={panelTransition}

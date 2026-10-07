@@ -432,7 +432,6 @@ section:first-of-type { border-top: none; }
   color: inherit;
   font: inherit;
   text-align: left;
-  cursor: pointer;
 }
 .project-index {
   font-family: var(--font-mono);
@@ -506,6 +505,7 @@ section:first-of-type { border-top: none; }
   transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
 .project-icon-link svg { width: 15px; height: 15px; }
+.project-chevron { cursor: default; }
 .project-chevron svg { width: 16px; height: 16px; transition: transform 0.45s var(--ease-out); }
 .project-icon-link:hover,
 .project-chevron:hover { color: var(--accent-soft); border-color: var(--accent-soft); background: var(--accent-wash); }
