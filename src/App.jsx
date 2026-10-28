@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { ThemeProvider, useTheme } from "./hooks/useTheme.jsx";
 import { ACCENTS } from "./data/data.js";
 import Header from "./components/Header.jsx";
@@ -13,6 +13,12 @@ import { ScrollProgress, BackToTop } from "./components/ScrollChrome.jsx";
 import Intro from "./components/Intro.jsx";
 import GradientWaves from "./fx/GradientWaves.jsx";
 import ClickSpark from "./fx/ClickSpark.jsx";
+
+// Layout effect on the client (before first paint), a no-op effect on
+// the server so React doesn't warn about useLayoutEffect during render.
+const useClientLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+const INTRO_SEEN_KEY = "biswash:intro-seen";
 
 function ThemedBackdrop() {
   const { mode, accentId } = useTheme();
@@ -49,7 +55,28 @@ function ThemedBackdrop() {
 }
 
 export default function App() {
-  const [introDone, setIntroDone] = useState(false);
+  // The intro overlay is client-only: the prerendered HTML never
+  // contains it, so crawlers always see the page itself instead of an
+  // overlay-only first paint. Starting "done" keeps hydration markup
+  // identical to the server, then the layout effect may show it before
+  // first paint for a real visitor.
+  const [introDone, setIntroDone] = useState(true);
+
+  useClientLayoutEffect(() => {
+    let seen = false;
+    try {
+      seen = sessionStorage.getItem(INTRO_SEEN_KEY) === "1";
+    } catch {
+      /* storage blocked — show the intro like a first visit */
+    }
+    if (seen) return;
+    try {
+      sessionStorage.setItem(INTRO_SEEN_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+    setIntroDone(false);
+  }, []);
 
   return (
     <ThemeProvider>

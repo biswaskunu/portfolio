@@ -1,12 +1,16 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 /**
  * Magnet
  * React-Bits-style pointer-following hover: the child is pulled
  * gently toward the cursor while hovered, springing back to rest on
- * mouseleave. Skipped for reduced-motion/touch, same guard as the
- * original tilt effect in main.js.
+ * mouseleave. Skipped for reduced-motion/touch.
+ *
+ * The capability check runs in an effect, not during render, so the
+ * server render and the first client render are identical (a plain
+ * div) — required for hydration of the prerendered page. The magnetic
+ * wrapper mounts right after, before paint.
  */
 export default function Magnet({ children, className = "", strength = 0.25, range = 60 }) {
   const ref = useRef(null);
@@ -14,13 +18,18 @@ export default function Magnet({ children, className = "", strength = 0.25, rang
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 200, damping: 18, mass: 0.4 });
   const springY = useSpring(y, { stiffness: 200, damping: 18, mass: 0.4 });
+  const [enabled, setEnabled] = useState(false);
 
-  const prefersReducedMotion =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const hasFinePointer =
-    typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
+  useEffect(() => {
+    const fine =
+      typeof window.matchMedia === "function" && window.matchMedia("(pointer: fine)").matches;
+    const reduce =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setEnabled(Boolean(fine && !reduce));
+  }, []);
 
-  if (prefersReducedMotion || !hasFinePointer) {
+  if (!enabled) {
     return <div className={className}>{children}</div>;
   }
 

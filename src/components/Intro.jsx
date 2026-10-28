@@ -17,11 +17,13 @@ export default function Intro({ onFinish }) {
 
     // Safety net: never trap the user behind the overlay. If the fold
     // animation (or its onComplete callback) fails for any reason,
-    // force-finish so the site is always revealed.
+    // force-finish so the site is always revealed. Capped at 2.5s so a
+    // broken animation can't hold scroll hostage (normal run-through
+    // finishes around ~2s).
     const failsafe = setTimeout(() => {
       document.body.style.overflow = "";
       onFinish();
-    }, 3500);
+    }, 2500);
 
     if (prefersReducedMotion) {
       const t = setTimeout(() => {
@@ -46,11 +48,12 @@ export default function Intro({ onFinish }) {
     setPhase("hold");
     setTimeout(() => setPhase("out"), 450);
     // If the CSS transitionend event never fires (e.g. transitions
-    // disabled), still unmount the overlay shortly after fading.
+    // disabled), still unmount the overlay shortly after fading —
+    // deliberately before the 2.5s failsafe above.
     setTimeout(() => {
       document.body.style.overflow = "";
       onFinish();
-    }, 1500);
+    }, 1200);
   }
 
   function handleTransitionEnd() {

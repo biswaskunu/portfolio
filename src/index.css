@@ -95,7 +95,12 @@ body::-webkit-scrollbar {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
 }
 
 body {
@@ -442,6 +447,7 @@ section:first-of-type { border-top: none; }
   color: inherit;
   font: inherit;
   text-align: left;
+  cursor: pointer;
 }
 .project-index {
   font-family: var(--font-mono);
@@ -521,26 +527,56 @@ section:first-of-type { border-top: none; }
 .project-chevron:hover { color: var(--accent-soft); border-color: var(--accent-soft); background: var(--accent-wash); }
 .project-card.is-open .project-chevron svg { transform: rotate(180deg); }
 
-/* --- Expanded details: vertical ease expansion --- */
+/* --- Expanded details: vertical ease expansion ---
+   Collapse only applies when `.js` is on <html> (set before first
+   paint by the inline head script). Prerendered / no-JS output has no
+   `.js` class, so every description ships expanded and readable —
+   never display:none. grid-template-rows animates 0fr <-> 1fr, which
+   measures the content exactly (no max-height guessing). */
+.project-panel {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  overflow: hidden;
+  transition: grid-template-rows 0.5s var(--ease-out), opacity 0.35s var(--ease-out);
+}
+.js .project-panel {
+  transition: grid-template-rows 0.5s var(--ease-out), opacity 0.35s var(--ease-out) 0.14s;
+}
+.js .project-panel:not(.is-open) {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.5s var(--ease-out), opacity 0.2s var(--ease-out);
+}
 .project-panel-inner {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 0;
+  overflow: hidden;
   padding: 1.15rem 1.15rem 1.3rem;
   border-top: 1px solid var(--surface-border);
+  transition: padding 0.5s var(--ease-out), border-top-width 0.5s var(--ease-out);
+}
+/* The inner's vertical padding still counts toward the 0fr track's
+   minimum (40px of padding-only height otherwise), so it collapses to
+   0 together with the row. */
+.js .project-panel:not(.is-open) .project-panel-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top-width: 0;
 }
 
 .project-desc { color: var(--text-dim); font-size: 0.93rem; line-height: 1.6; margin: 0; max-width: 95ch; }
 
+/* Repo path is static content — always visible (only the live
+   language / last-commit cells fade in once fetched). */
 .project-github-stats {
   display: flex; flex-wrap: wrap; gap: 0.85rem;
   font-family: var(--font-mono);
   font-size: 0.76rem;
   color: var(--text-faint);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease-out);
 }
-.project-github-stats.stats-loaded { opacity: 1; }
 .gh-stat { display: inline-flex; align-items: center; gap: 0.25rem; }
 .gh-lang { color: var(--accent-soft); }
 .gh-pushed, .gh-repo { color: var(--text-faint); }
@@ -880,6 +916,64 @@ section:first-of-type { border-top: none; }
   .project-index { display: none; }
   .project-stat-fork { display: none; }
   .project-name { font-size: 1.05rem; }
+}
+
+/* =========================================================
+   ENTRANCE ANIMATIONS — CSS-driven, prerender-safe
+   ---------------------------------------------------------
+   The prerendered HTML ships every element in its final, visible
+   state. Animations only engage once JS has set `.js` (head script)
+   and React has added the reveal classes after hydration, so:
+   - no-JS crawlers read plain text (no inline opacity:0 leftovers)
+   - JS visitors keep the exact same reveal/stagger behaviour
+   `.is-armed` hides an element only while it is queued just below the
+   fold — never as a permanent state — so scroll-less JS renderers
+   still see content.
+========================================================= */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(var(--rv-x, 0px), var(--rv-y, 40px), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+.reveal-anim {
+  --rv-x: 0px;
+  --rv-y: 40px;
+  --rv-dur: 0.7s;
+  --rv-delay: 0s;
+}
+.reveal-anim.is-armed:not(.is-in) {
+  opacity: 0;
+  transform: translate3d(var(--rv-x), var(--rv-y), 0);
+}
+.reveal-anim.is-in {
+  animation: reveal-up var(--rv-dur) var(--ease-out) var(--rv-delay) both;
+}
+
+.stagger-item { --rv-y: 24px; }
+.stagger-group.is-armed:not(.is-in) .stagger-item {
+  opacity: 0;
+  transform: translate3d(0, var(--rv-y), 0);
+}
+.stagger-group.is-in .stagger-item {
+  animation: reveal-up var(--stagger-dur, 0.55s) var(--ease-out)
+             calc(var(--stagger, 0.07s) * var(--i, 0)) both;
+}
+
+/* Hero: mount-triggered entrance, gated on `.js` so the prerendered
+   copy stays visible without scripts. */
+.js .hero-eyebrow { --rv-y: 0px; animation: reveal-up 0.5s var(--ease-out) 0.1s both; }
+.js .hero-sub { --rv-y: 14px; animation: reveal-up 0.6s var(--ease-out) 0.95s both; }
+.js .hero-actions { --rv-y: 14px; animation: reveal-up 0.6s var(--ease-out) 1.08s both; }
+.js .hero-stats { --rv-y: 24px; animation: reveal-up 0.7s var(--ease-out) 1.2s both; }
+
+/* SplitText: per-character fold-in (replaces the framer-motion split). */
+.split-word { display: inline-block; white-space: nowrap; }
+.split-char { display: inline-block; }
+.js .split-char {
+  animation: split-in var(--split-dur, 0.6s) var(--ease-out) var(--split-delay, 0s) both;
+}
+@keyframes split-in {
+  from { opacity: 0; transform: translateY(110%); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================================================

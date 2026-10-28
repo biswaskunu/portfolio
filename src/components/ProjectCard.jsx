@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { StaggerItem } from "../fx/AnimatedContent.jsx";
 import { formatRelativeTime } from "../hooks/useGithubStats.js";
-
-const EASE = [0.16, 1, 0.3, 1];
 
 function statusLabel(status) {
   return status === "in-progress" ? "In progress" : "Shipped";
@@ -47,60 +44,80 @@ function ChevronIcon() {
 /**
  * ProjectCard
  * Full-width horizontal row: project name on the left, GitHub link +
- * star/fork counters as icon pills on the right. Hovering the row
- * expands it vertically (ease-out height animation) to reveal the
- * description, live language / last-commit stats and the tag list;
- * leaving the row collapses it again — no sticky open state.
- * Keeps the section's existing border-glow treatment.
+ * star/fork counters as icon pills on the right.
+ *
+ * Expansion: the name row is a real <button aria-expanded>, so touch
+ * and keyboard users can toggle it — hover (mouse pointers only, via
+ * pointerType checks) still opens/closes it on desktop. The panel
+ * itself is always in the DOM; CSS collapses it only when the `.js`
+ * class is present, so the prerendered HTML ships every description
+ * expanded and readable (no display:none, no inline height:0).
  */
 export default function ProjectCard({ project, stats, index }) {
   const ref = useRef(null);
   const [open, setOpen] = useState(false);
-  const reduceMotion = useReducedMotion();
 
   const loaded = Boolean(stats);
 
-  const panelTransition = reduceMotion
-    ? { duration: 0 }
-    : {
-        height: { duration: 0.5, ease: EASE },
-        opacity: { duration: 0.35, ease: EASE, delay: open ? 0.14 : 0 },
-      };
-
-  function handleMouseEnter() {
-    setOpen(true);
+  function setGlow(x, y, intensity) {
     const node = ref.current;
     if (!node) return;
-    node.style.setProperty("--glow-x", "50%");
-    node.style.setProperty("--glow-y", "50%");
-    node.style.setProperty("--glow-intensity", "1");
+    node.style.setProperty("--glow-x", x);
+    node.style.setProperty("--glow-y", y);
+    node.style.setProperty("--glow-intensity", intensity);
   }
 
-  function handleMouseMove(e) {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    ref.current.style.setProperty("--glow-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
-    ref.current.style.setProperty("--glow-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
-    ref.current.style.setProperty("--glow-intensity", "1");
+  // Hover is a mouse-only affordance: emulated mouse events after a
+  // tap must not fight the click toggle on touch devices.
+  function handlePointerEnter(e) {
+    if (e.pointerType !== "mouse") return;
+    setOpen(true);
+    setGlow("50%", "50%", "1");
   }
 
-  function handleMouseLeave() {
+  function handlePointerMove(e) {
+    if (e.pointerType !== "mouse") return;
+    const node = ref.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    setGlow(
+      `${((e.clientX - rect.left) / rect.width) * 100}%`,
+      `${((e.clientY - rect.top) / rect.height) * 100}%`,
+      "1"
+    );
+  }
+
+  function handlePointerLeave(e) {
+    if (e.pointerType !== "mouse") return;
     setOpen(false);
-    ref.current?.style.setProperty("--glow-intensity", "0");
+    setGlow("50%", "50%", "0");
   }
+
+  function handleToggle() {
+    setOpen((wasOpen) => !wasOpen);
+    setGlow("50%", "50%", "1");
+  }
+
+  const panelId = `project-panel-${project.id}`;
 
   return (
     <StaggerItem className="project-card-wrap">
-      <motion.article
+      <article
         ref={ref}
         className={`project-card magic-card ${open ? "is-open" : ""}`}
         data-project-id={project.id}
-        onMouseEnter={handleMouseEnter}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        onPointerEnter={handlePointerEnter}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
       >
         <div className="project-row">
-          <div className="project-row-main">
+          <button
+            type="button"
+            className="project-row-main"
+            aria-expanded={open}
+            aria-controls={panelId}
+            onClick={handleToggle}
+          >
             {typeof index === "number" && (
               <span className="project-index">{String(index + 1).padStart(2, "0")}</span>
             )}
@@ -108,7 +125,7 @@ export default function ProjectCard({ project, stats, index }) {
               <span className="project-name">{project.name}</span>
               <span className="project-tagline">{project.tagline}</span>
             </span>
-          </div>
+          </button>
 
           <div className="project-meta">
             <span className={`project-icon-stat ${loaded ? "stats-loaded" : ""}`} title="Stars">
@@ -134,13 +151,7 @@ export default function ProjectCard({ project, stats, index }) {
           </div>
         </div>
 
-        <motion.div
-          className="project-panel"
-          initial={false}
-          animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-          transition={panelTransition}
-          style={{ overflow: "hidden" }}
-        >
+        <div className={`project-panel ${open ? "is-open" : ""}`} id={panelId}>
           <div className="project-panel-inner">
             <p className="project-desc">{project.description}</p>
 
@@ -165,8 +176,8 @@ export default function ProjectCard({ project, stats, index }) {
               <span className={`project-status status-${project.status}`}>{statusLabel(project.status)}</span>
             </div>
           </div>
-        </motion.div>
-      </motion.article>
+        </div>
+      </article>
     </StaggerItem>
   );
 }

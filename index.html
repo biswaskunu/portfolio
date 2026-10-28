@@ -12,6 +12,11 @@
     <meta name="theme-color" content="#181816" />
     <script>
       (function () {
+        // Marks the document as JS-capable BEFORE first paint so CSS can
+        // gate JS-only UI (collapsed project panels, entrance animations).
+        // Crawlers that don't run scripts never get this class, so the
+        // prerendered HTML renders fully expanded and readable.
+        document.documentElement.classList.add("js");
         try {
           var saved = localStorage.getItem("theme");
           var theme = saved || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
