@@ -14,6 +14,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { SITE_URL } from "../src/data/site.js";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
@@ -59,6 +60,32 @@ if (!html.includes(ROOT_MARKER)) {
 html = html.replace(ROOT_MARKER, () => `<div id="root">${appHtml}</div>`);
 await writeFile(indexPath, html);
 
+// Fill __SITE_URL__ / __LASTMOD__ tokens from src/data/site.js in the
+// built crawl surface: canonical/OG tags in index.html plus the public
+// text files vite copied verbatim (robots.txt, sitemap.xml, llms.txt).
+const TOKEN_FILES = ["index.html", "robots.txt", "sitemap.xml", "llms.txt"];
+const TOKENS = {
+  __SITE_URL__: SITE_URL.replace(/\/+$/, ""),
+  __LASTMOD__: new Date().toISOString().slice(0, 10),
+};
+for (const file of TOKEN_FILES) {
+  const filePath = path.join(distDir, file);
+  let content = await readFile(filePath, "utf8");
+  const original = content;
+  for (const [token, value] of Object.entries(TOKENS)) {
+    content = content.split(token).join(value);
+  }
+  if (content !== original) {
+    await writeFile(filePath, content);
+  }
+  if (/__(SITE_URL|LASTMOD)__/.test(content)) {
+    throw new Error(`prerender: unresolved build token left in dist/${file}`);
+  }
+}
+
 console.log(
   `prerender: injected ${appHtml.length} bytes of server-rendered markup into dist/index.html`
+);
+console.log(
+  `prerender: filled site tokens in ${TOKEN_FILES.join(", ")} (site=${SITE_URL}, lastmod=${TOKENS.__LASTMOD__})`
 );

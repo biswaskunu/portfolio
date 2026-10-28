@@ -1,0 +1,29 @@
+# Biswash Rath
+
+> Backend engineer specializing in Rust, Axum and PostgreSQL. 2nd-year CSE student. Builds production-style backend systems — identity & access management, bytecode virtual machines, real-time game servers, tamper-evident document systems — and ships them as public GitHub repositories. All content below is server-rendered HTML and readable without JavaScript.
+
+## Pages
+
+- [Home](__SITE_URL__/): Single-page portfolio — hero, selected work, tech stack, activity log, screenshots, contact links.
+
+## Shipped projects
+
+- [IAM Platform](__SITE_URL__/#work): Rust/Axum/PostgreSQL identity & access management backend — users, organizations, roles, permissions; JWT rotation, bcrypt, hashed API keys.
+- [History Guesser](__SITE_URL__/#work): Full-stack GeoGuessr-style game — Rust/Axum + React + Leaflet, JWT auth, per-PR CI previews on Railway + Netlify.
+- [sherlock](__SITE_URL__/#work): Local system monitor — samples CPU/memory/disk/process stats, streams over SSE, correlates past spikes to processes.
+- [miniVM Toolchain](__SITE_URL__/#work): Stack-based bytecode VM, assembler and disassembler in pure Rust (std only).
+- [Coder's Hub](__SITE_URL__/#work): Guided coding-learning platform prototype (SIH 2025 pitch).
+- [Kanban](__SITE_URL__/#work): Drag-and-drop task board in plain HTML/CSS/JS.
+- [lookaway](__SITE_URL__/#work): 20-20-20 screen-break CLI with cross-platform notifications.
+
+## In progress
+
+- [ChainDock](__SITE_URL__/#work): SIH 2026 (MHA/NCRB) tamper-evident document management — SHA-256 hash-chained audit log, Ed25519 signatures, Rust/Axum/PostgreSQL.
+- [Java Multiplayer Server](__SITE_URL__/#work): Real-time multiplayer game server in Java.
+- [git-stat-roaster](__SITE_URL__/#work): GitHub stats → funny roast web app (Rust/Axum + React).
+
+## Links
+
+- GitHub: https://github.com/biswaskunu
+- LinkedIn: https://linkedin.com/in/biswash-rath-25a871379
+- Email: kunubiswas2@gmail.com
