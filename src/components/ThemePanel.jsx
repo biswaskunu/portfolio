@@ -8,7 +8,7 @@ export default function ThemePanel() {
   return (
     <section className="theme-section reveal" id="theme">
       <AnimatedContent className="section-head">
-        <p className="section-eyebrow">04 — Appearance</p>
+        <p className="section-eyebrow">06 — Appearance</p>
         <h2 className="section-title">Make it yours</h2>
         <p className="section-desc">
           Pick a mode and an accent color. Both are saved, so it looks the same next time you're here.

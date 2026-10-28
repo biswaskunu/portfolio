@@ -5,6 +5,7 @@ import Header from "./components/Header.jsx";
 import JsonLd from "./components/JsonLd.jsx";
 import Hero from "./components/Hero.jsx";
 import Work from "./components/Work.jsx";
+import About from "./components/About.jsx";
 import Stack from "./components/Stack.jsx";
 import Log from "./components/Log.jsx";
 import Gallery from "./components/Gallery.jsx";
@@ -93,6 +94,7 @@ export default function App() {
       <main id="main-content">
         <Hero />
         <Work />
+        <About />
         <Stack />
         <Log />
         <Gallery />

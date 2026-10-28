@@ -32,6 +32,7 @@ const REQUIRED_TEXT = [
   "build the kind of backend infrastructure", // the hero bio
   "IAM Platform", // project names
   "Biswash Rath", // identity (footer)
+  "Who is Biswash Rath?", // the About FAQ (visible Q&A)
   'type="application/ld+json"', // structured data must ship in the HTML
 ];
 for (const text of REQUIRED_TEXT) {

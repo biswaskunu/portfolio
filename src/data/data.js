@@ -212,6 +212,45 @@ export const LOG_ENTRIES = [
 ];
 
 /**
+ * ABOUT / FAQS
+ * The About section is written for answer extraction (AEO): every FAQ
+ * answer is self-contained — it names Biswash and reads correctly when
+ * lifted out of the page by an AI crawler. JsonLd.jsx derives the
+ * FAQPage schema from FAQS, so markup and visible copy can't drift.
+ */
+export const ABOUT_PARAGRAPHS = [
+  "Biswash Rath is a 2nd-year CSE student and backend engineer who builds production-style systems in Rust, Axum and PostgreSQL — identity & access management, bytecode virtual machines, real-time game servers, and tamper-evident document management — shipped as public GitHub repositories.",
+  "Hackathon work includes ChainDock for Smart India Hackathon 2026, built as Team ASPIRE for the Ministry of Home Affairs (NCRB / Women Safety Division), and Coder's Hub, a guided learning platform pitched at SIH 2025.",
+];
+
+export const FAQS = [
+  {
+    q: "Who is Biswash Rath?",
+    a: "Biswash Rath is a backend engineer and 2nd-year CSE student who builds production-style systems in Rust, Axum and PostgreSQL. He ships them as public GitHub repositories — an identity & access management platform, a from-scratch bytecode VM, a full-stack guessing game, a local system monitor, and more.",
+  },
+  {
+    q: "What does Biswash build?",
+    a: "Backend systems in Rust/Axum/PostgreSQL: JWT-rotating identity and access management, a bytecode VM toolchain with an assembler and debugger, SSE-streaming system monitors, real-time multiplayer game servers, and tamper-evident document management — plus small CLIs like lookaway and drag-and-drop web tools like Kanban.",
+  },
+  {
+    q: "What is the IAM Platform?",
+    a: "The IAM Platform is Biswash Rath's identity & access management backend: a full authorization chain of users, organizations, memberships, roles and permissions, with JWT access/refresh rotation, bcrypt hashing, and API keys and session tokens stored only as SHA-256 hashes. It is written in Rust with Axum and PostgreSQL.",
+  },
+  {
+    q: "What is ChainDock?",
+    a: "ChainDock is a Smart India Hackathon 2026 project (SIH26190) for the Ministry of Home Affairs — NCRB / Women Safety Division — built by Team ASPIRE: a tamper-evident document management system for FIRs, charge sheets, witness statements and forensic reports. Its core differentiator is provable tamper-evidence: a SHA-256 hash-chained audit log plus Ed25519 digital signatures on finalized documents, on a Rust/Axum/PostgreSQL backend with three fixed roles (investigator, supervisor, admin).",
+  },
+  {
+    q: "What is the miniVM Toolchain?",
+    a: "The miniVM Toolchain is a stack-based bytecode virtual machine, assembler and disassembler written in pure Rust with zero external dependencies. It is Turing-complete, with comparison operators, a two-pass assembler that resolves forward label references, control-flow jumps, and an interactive step-through debugger.",
+  },
+  {
+    q: "How can I contact Biswash Rath?",
+    a: "Email Biswash Rath at kunubiswas2@gmail.com, or reach him on GitHub at github.com/biswaskunu and on LinkedIn at linkedin.com/in/biswash-rath-25a871379. All project repositories are linked from the page above.",
+  },
+];
+
+/**
  * GALLERY_ITEMS
  * Accordion Gallery content. Images live in `public/gallery/`.
  * Recommended size: 1200×800 (3:2).

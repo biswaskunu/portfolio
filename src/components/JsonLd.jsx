@@ -7,7 +7,7 @@
  * No volatile values (dates, random ids) — the client's render must
  * match the server's byte-for-byte.
  */
-import { PROJECTS, STACK, TAGS } from "../data/data.js";
+import { PROJECTS, STACK, TAGS, FAQS } from "../data/data.js";
 import {
   SITE_URL,
   SITE_NAME,
@@ -79,6 +79,15 @@ export function buildJsonLd() {
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": PERSON_ID },
         mainEntity: { "@id": PERSON_ID },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE_URL}/#faq`,
+        mainEntity: FAQS.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
       },
       ...PROJECTS.map(projectToCode),
     ],

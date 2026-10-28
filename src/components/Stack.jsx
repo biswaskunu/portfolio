@@ -39,7 +39,7 @@ export default function Stack() {
   return (
     <section className="stack reveal" id="stack">
       <AnimatedContent className="section-head">
-        <p className="section-eyebrow">02 — Toolchain</p>
+        <p className="section-eyebrow">03 — Toolchain</p>
         <h2 className="section-title">What I build with</h2>
         <p className="section-desc">
           Depth over breadth — one core stack, worked consistently across four shipped projects.
