@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useLayoutEffect, useState } from "react";
 import { ThemeProvider, useTheme } from "./hooks/useTheme.jsx";
 import { ACCENTS } from "./data/data.js";
 import Header from "./components/Header.jsx";
@@ -13,8 +13,13 @@ import ThemePanel from "./components/ThemePanel.jsx";
 import Contact, { Footer } from "./components/Contact.jsx";
 import { ScrollProgress, BackToTop } from "./components/ScrollChrome.jsx";
 import Intro from "./components/Intro.jsx";
-import GradientWaves from "./fx/GradientWaves.jsx";
 import ClickSpark from "./fx/ClickSpark.jsx";
+
+// The WebGL backdrop is not needed for first paint — split it out of
+// the main bundle and mount it only after the browser goes idle, so
+// the hero/content render and hydrate without GPU work competing for
+// the main thread.
+const GradientWaves = lazy(() => import("./fx/GradientWaves.jsx"));
 
 // Layout effect on the client (before first paint), a no-op effect on
 // the server so React doesn't warn about useLayoutEffect during render.
@@ -24,11 +29,29 @@ const INTRO_SEEN_KEY = "biswash:intro-seen";
 
 function ThemedBackdrop() {
   const { mode, accentId } = useTheme();
+  const [ready, setReady] = useState(false);
+
+  // Server and first client render both stay null (markup identical);
+  // the shader chunk loads once the main thread is idle.
+  useClientLayoutEffect(() => {
+    const idle =
+      typeof window.requestIdleCallback === "function"
+        ? (cb) => window.requestIdleCallback(cb, { timeout: 2500 })
+        : (cb) => setTimeout(cb, 1500);
+    const id = idle(() => setReady(true));
+    return () => {
+      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(id);
+      else clearTimeout(id);
+    };
+  }, []);
+
+  if (!ready) return null;
+
   const accent = ACCENTS.find((a) => a.id === accentId) || ACCENTS[0];
   const variant = mode === "light" ? accent.light : accent.dark;
 
   return (
-    <>
+    <Suspense fallback={null}>
       <GradientWaves
         className="gradient-waves-backdrop"
         horizonColor={mode === "light" ? "#faf8f4" : "#181816"}
@@ -52,7 +75,7 @@ function ThemedBackdrop() {
         grain={false}
         grainIntensity={0}
       />
-    </>
+    </Suspense>
   );
 }
 

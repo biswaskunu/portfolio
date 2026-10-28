@@ -35,11 +35,23 @@ export default function Gallery() {
                 aria-expanded={isActive}
                 aria-label={`${item.title} — ${item.kind}`}
                 className={`accordion-panel ${isActive ? "accordion-active" : ""}`}
-                style={{ "--panel-image": `url("${item.image}")` }}
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
               >
+                <picture className="accordion-picture">
+                  <source type="image/avif" srcSet={item.imageAvif} />
+                  <source type="image/webp" srcSet={item.imageWebp} />
+                  <img
+                    className="accordion-img"
+                    src={item.image}
+                    alt={item.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width="1200"
+                    height="800"
+                  />
+                </picture>
                 <span className="accordion-scrim" aria-hidden="true" />
                 <span className="accordion-strip" aria-hidden="true">
                   <span className="accordion-strip-kind">{item.kind}</span>

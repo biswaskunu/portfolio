@@ -3,13 +3,6 @@
  * Single source of truth for all portfolio content.
  */
 
-export const HERO_STATS = [
-  { value: "9.58", label: "Year‑1 CGPA" },
-  { value: "7", label: "Shipped repos" },
-  { value: "3", label: "Hackathon teams led" },
-  { value: "1", label: "Core stack, no context‑switching" },
-];
-
 export const TAGS = [
   { id: "rust", label: "Rust" },
   { id: "axum", label: "Axum" },
@@ -132,6 +125,16 @@ export const PROJECTS = [
     url: "https://github.com/biswaskunu/git-stat-roaster",
     status: "in-progress",
   },
+];
+
+export const PROJECT_COUNT = PROJECTS.length;
+export const SHIPPED_COUNT = PROJECTS.filter((p) => p.status === "shipped").length;
+
+export const HERO_STATS = [
+  { value: "9.58", label: "Year‑1 CGPA" },
+  { value: String(SHIPPED_COUNT), label: "Shipped repos" },
+  { value: "3", label: "Hackathon teams led" },
+  { value: "1", label: "Core stack, no context‑switching" },
 ];
 
 export const STACK = [
@@ -263,6 +266,9 @@ export const GALLERY_ITEMS = [
     detail: "GeoGuessr-style game — drop a map pin on historical photos, scored on accuracy.",
     repo: "github.com/biswaskunu/history-guesser",
     image: "/gallery/history-guesser.png",
+    imageWebp: "/gallery/history-guesser.webp",
+    imageAvif: "/gallery/history-guesser.avif",
+    alt: "History Guesser — map of a historical photo with a scored map pin",
   },
   {
     id: "advancing-rust",
@@ -271,6 +277,9 @@ export const GALLERY_ITEMS = [
     detail: "Summer internship course, Silicon University (25 May – 28 Jun 2026).",
     repo: "Silicon University · 2026",
     image: "/gallery/rust-certificate.png",
+    imageWebp: "/gallery/rust-certificate.webp",
+    imageAvif: "/gallery/rust-certificate.avif",
+    alt: "Advancing with Rust course certificate from Silicon University",
   },
   {
     id: "sih-2026",
@@ -279,6 +288,9 @@ export const GALLERY_ITEMS = [
     detail: "SIH26190 — tamper-evident document management for the Ministry of Home Affairs (NCRB).",
     repo: "github.com/biswaskunu/ChainDock",
     image: "/gallery/chainDock.png",
+    imageWebp: "/gallery/chainDock.webp",
+    imageAvif: "/gallery/chainDock.avif",
+    alt: "Team ASPIRE at Smart India Hackathon 2026 with the ChainDock project",
   },
   {
     id: "odisha-boards",
@@ -287,6 +299,9 @@ export const GALLERY_ITEMS = [
     detail: "Award ceremony — ranked 12th in the Odisha Class 12 board examinations.",
     repo: "Odisha CHSE · Award ceremony",
     image: "/gallery/12th-award.png",
+    imageWebp: "/gallery/12th-award.webp",
+    imageAvif: "/gallery/12th-award.avif",
+    alt: "Receiving the 12th-rank award at the Odisha Class 12 board examination ceremony",
   },
   {
     id: "lookaway",
@@ -295,5 +310,8 @@ export const GALLERY_ITEMS = [
     detail: "20-20-20 screen-break CLI — cross-platform Rust notifications.",
     repo: "github.com/biswaskunu/lookaway",
     image: "/gallery/lookaway.png",
+    imageWebp: "/gallery/lookaway.webp",
+    imageAvif: "/gallery/lookaway.avif",
+    alt: "lookaway — 20-20-20 screen-break reminder CLI running in a terminal",
   },
 ];

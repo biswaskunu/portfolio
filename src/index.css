@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap");
+/* Fonts are loaded via <link rel="stylesheet"> in index.html — an
+   @import here would serialize CSS fetches and delay first paint. */
 
 /* =========================================================
    TOKENS
@@ -737,18 +738,20 @@ section:first-of-type { border-top: none; }
   text-align: left;
   color: #fff;
 }
-/* Image on its own layer so the active panel can Ken-Burns zoom it. */
-.accordion-panel::before {
-  content: "";
+/* Real <img> layer (AVIF/WebP via <picture>) so crawlers can read the
+   images and the active panel can Ken-Burns zoom it. */
+.accordion-picture { display: contents; }
+.accordion-img {
   position: absolute;
   inset: 0;
-  background-image: var(--panel-image);
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transform: scale(1);
   transition: transform 5s ease;
 }
-.accordion-active::before { transform: scale(1.08); }
+.accordion-active .accordion-img { transform: scale(1.08); }
 .accordion-panel:hover { border-color: var(--accent-soft); }
 .accordion-active {
   flex-grow: 3.6;

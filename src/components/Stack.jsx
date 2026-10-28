@@ -1,6 +1,6 @@
 import AnimatedContent, { StaggerGroup, StaggerItem } from "../fx/AnimatedContent.jsx";
 import BorderGlow from "../fx/BorderGlow.jsx";
-import { STACK, ACCENTS } from "../data/data.js";
+import { STACK, ACCENTS, SHIPPED_COUNT } from "../data/data.js";
 import { useTheme } from "../hooks/useTheme.jsx";
 
 /** Convert hex to "H S L" string for BorderGlow's glowColor prop. */
@@ -42,7 +42,7 @@ export default function Stack() {
         <p className="section-eyebrow">03 — Toolchain</p>
         <h2 className="section-title">What I build with</h2>
         <p className="section-desc">
-          Depth over breadth — one core stack, worked consistently across four shipped projects.
+          Depth over breadth — one core stack, worked consistently across {SHIPPED_COUNT} shipped projects.
         </p>
       </AnimatedContent>
       <StaggerGroup className="stack-grid">

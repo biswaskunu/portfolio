@@ -44,7 +44,7 @@ export default function Work() {
         <p className="section-eyebrow">01 — Project index</p>
         <h2 className="section-title">Find a project by stack</h2>
         <p className="section-desc">
-          Every project below is a real, shipped repo — not a spec. Filter by the technology you care about.
+          Every project below is a real repo — shipped or actively in progress, not a spec. Filter by the technology you care about.
         </p>
       </AnimatedContent>
 
