@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { ThemeProvider, useTheme } from "./hooks/useTheme.jsx";
 import { ACCENTS } from "./data/data.js";
 import Header from "./components/Header.jsx";
+import JsonLd from "./components/JsonLd.jsx";
 import Hero from "./components/Hero.jsx";
 import Work from "./components/Work.jsx";
 import Stack from "./components/Stack.jsx";
@@ -80,6 +81,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
+      <JsonLd />
       {!introDone && <Intro onFinish={() => setIntroDone(true)} />}
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <ScrollProgress />
