@@ -15,7 +15,7 @@ export default function Gallery() {
   return (
     <section className="gallery reveal" id="gallery">
       <AnimatedContent className="section-head">
-        <p className="section-eyebrow">05 — Gallery</p>
+        <p className="section-eyebrow">04 — Gallery</p>
         <h2 className="section-title">Screenshots &amp; moments</h2>
         <p className="section-desc">
           Project screenshots and achievement photos. Hover or tap a panel to

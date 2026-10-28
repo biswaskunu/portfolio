@@ -117,12 +117,12 @@ export default function App() {
       <main id="main-content">
         <Hero />
         <Work />
-        <About />
         <Stack />
         <Log />
         <Gallery />
         <ThemePanel />
         <Contact />
+        <About />
       </main>
 
       <Footer />

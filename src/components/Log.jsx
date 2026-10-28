@@ -5,7 +5,7 @@ export default function Log() {
   return (
     <section className="log reveal" id="log">
       <AnimatedContent className="section-head">
-        <p className="section-eyebrow">04 — Track record</p>
+        <p className="section-eyebrow">03 — Track record</p>
         <h2 className="section-title">Hackathons &amp; ventures</h2>
         <p className="section-desc">
           Competitive builds, plus the side projects that keep me shipping between semesters.

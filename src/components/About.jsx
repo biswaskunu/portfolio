@@ -11,7 +11,7 @@ export default function About() {
   return (
     <section className="about reveal" id="about">
       <AnimatedContent className="section-head">
-        <p className="section-eyebrow">02 — About</p>
+        <p className="section-eyebrow">06 — About</p>
         <h2 className="section-title">Who's behind the repos</h2>
       </AnimatedContent>
       <AnimatedContent className="about-intro">
