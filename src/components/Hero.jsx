@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="hero">
       <div className="hero-inner">
         <p className="hero-eyebrow">
-          <span className="dot"></span> Bhubaneswar, India — open to remote internships
+          <span className="dot"></span> Biswash Rath · Rust Backend Developer · Bhubaneswar, India · Open to remote internships
         </p>
 
         <h1 className="hero-title">

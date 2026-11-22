@@ -1,6 +1,6 @@
 # Biswash Rath
 
-> Backend engineer specializing in Rust, Axum and PostgreSQL. 2nd-year CSE student. Builds production-style backend systems — identity & access management, bytecode virtual machines, real-time game servers, tamper-evident document systems — and ships them as public GitHub repositories. All content below is server-rendered HTML and readable without JavaScript.
+> Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, Odisha, India. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL, including identity and access management, asynchronous services, system monitoring, bytecode virtual machines and tamper-evident document systems. His work is published in public GitHub repositories. All content below is server-rendered HTML and readable without JavaScript.
 
 ## Pages
 

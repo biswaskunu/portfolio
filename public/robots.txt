@@ -2,7 +2,11 @@
 User-agent: *
 Allow: /
 
-# AI crawlers are welcome too; content is server-rendered, no JS required.
+# ChatGPT search crawler. Separate from GPTBot (model-training crawler).
+User-agent: OAI-SearchBot
+Allow: /
+
+# OpenAI model-training crawler. Kept allowed as in the existing policy.
 User-agent: GPTBot
 Allow: /
 

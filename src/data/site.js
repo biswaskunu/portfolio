@@ -8,9 +8,9 @@
  */
 export const SITE_URL = "https://biswash-rath.netlify.app";
 export const SITE_NAME = "Biswash Rath";
-export const SITE_TITLE = "Biswash Rath — Backend Engineer";
-export const SITE_TAGLINE = "Backend engineer who ships systems, not tutorials.";
+export const SITE_TITLE = "Biswash Rath | Rust Backend Developer in India";
+export const SITE_TAGLINE = "Rust backend developer building real systems with Axum and PostgreSQL.";
 export const SITE_DESCRIPTION =
-  "Biswash Rath — Rust/Axum/PostgreSQL backend engineer. 2nd year CSE student building production-style backend systems.";
+  "Biswash Rath is a Rust backend developer and CSE undergraduate in Bhubaneswar, India. Explore his work with Axum, PostgreSQL and systems programming.";
 export const OG_DESCRIPTION =
-  "Rust/Axum/PostgreSQL backend engineer. Shipped IAM systems, a bytecode VM, and a full-stack game — not tutorials.";
+  "Rust backend developer in Bhubaneswar, India. Explore Biswash Rath’s work with Axum, PostgreSQL, systems programming and open source.";
