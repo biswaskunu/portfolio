@@ -133,7 +133,7 @@ export const SHIPPED_COUNT = PROJECTS.filter((p) => p.status === "shipped").leng
 export const HERO_STATS = [
   { value: "9.58", label: "Year‑1 CGPA" },
   { value: String(SHIPPED_COUNT), label: "Shipped repos" },
-  { value: "3", label: "Hackathon teams led" },
+  { value: "4", label: "Hackathon teams led" },
   { value: "1", label: "Core stack, no context‑switching" },
 ];
 
@@ -222,18 +222,26 @@ export const LOG_ENTRIES = [
  * FAQPage schema from FAQS, so markup and visible copy can't drift.
  */
 export const ABOUT_PARAGRAPHS = [
-  "Biswash Rath is a 2nd-year CSE student and backend engineer who builds production-style systems in Rust, Axum and PostgreSQL — identity & access management, bytecode virtual machines, real-time game servers, and tamper-evident document management — shipped as public GitHub repositories.",
+  "Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, Odisha, India. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL — including identity and access management, asynchronous services, system monitoring, bytecode virtual machines and tamper-evident document management — and publishes his work in public GitHub repositories.",
   "Hackathon work includes ChainDock for Smart India Hackathon 2026, built as Team ASPIRE for the Ministry of Home Affairs (NCRB / Women Safety Division), and Coder's Hub, a guided learning platform pitched at SIH 2025.",
 ];
 
 export const FAQS = [
   {
     q: "Who is Biswash Rath?",
-    a: "Biswash Rath is a backend engineer and 2nd-year CSE student who builds production-style systems in Rust, Axum and PostgreSQL. He ships them as public GitHub repositories — an identity & access management platform, a from-scratch bytecode VM, a full-stack guessing game, a local system monitor, and more.",
+    a: "Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, Odisha, India. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL, and publishes his work in public GitHub repositories — including an identity and access management platform, a bytecode VM toolchain, a full-stack guessing game and a local system monitor.",
   },
   {
     q: "What does Biswash build?",
-    a: "Backend systems in Rust/Axum/PostgreSQL: JWT-rotating identity and access management, a bytecode VM toolchain with an assembler and debugger, SSE-streaming system monitors, real-time multiplayer game servers, and tamper-evident document management — plus small CLIs like lookaway and drag-and-drop web tools like Kanban.",
+    a: "Biswash Rath builds backend systems in Rust, Axum and PostgreSQL: JWT-rotating identity and access management, a bytecode VM toolchain with an assembler and debugger, SSE-streaming system monitors, multiplayer game services, and tamper-evident document management — plus small CLIs like lookaway and drag-and-drop web tools like Kanban.",
+  },
+  {
+    q: "Where is Biswash Rath based?",
+    a: "Biswash Rath is based in Bhubaneswar, Odisha, India. He is interested in remote software engineering internships and backend development opportunities.",
+  },
+  {
+    q: "What technologies does Biswash Rath work with?",
+    a: "Biswash Rath's primary backend stack is Rust, Axum, Tokio, PostgreSQL and SQLx. He also works with Java, React, Docker and web technologies, with project links available in his public GitHub profile.",
   },
   {
     q: "What is the IAM Platform?",

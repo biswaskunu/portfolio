@@ -59,7 +59,7 @@ export function buildJsonLd() {
         jobTitle: "Rust Backend Developer",
         email: "mailto:kunubiswas2@gmail.com",
         description:
-          "Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, India. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL, including identity and access management, asynchronous services, system monitoring and virtual machines.",
+          "Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, India, and open to remote internships. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL, including identity and access management, asynchronous services, system monitoring and virtual machines.",
         address: {
           "@type": "PostalAddress",
           addressLocality: "Bhubaneswar",

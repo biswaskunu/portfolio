@@ -12,7 +12,7 @@ export default function Contact() {
             something real.
           </h2>
           <p className="contact-sub">
-            Open to remote backend internships — GSoC, MLH Fellowship, Outreachy, or a YC-stage
+            Open to remote backend jobs — GSoC, MLH Fellowship, Outreachy, or a YC-stage
             startup that needs someone who ships.
           </p>
         </AnimatedContent>

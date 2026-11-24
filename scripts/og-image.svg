@@ -2,8 +2,9 @@
   <rect width="1200" height="630" fill="#181816"/>
   <rect x="0" y="0" width="1200" height="6" fill="#14b8a6"/>
   <rect x="0" y="624" width="1200" height="6" fill="#14b8a6"/>
-  <text x="90" y="230" font-family="DejaVu Sans Mono, monospace" font-size="72" font-weight="700" fill="#14b8a6">&gt;_</text>
-  <text x="90" y="340" font-family="DejaVu Sans Mono, monospace" font-size="56" font-weight="700" fill="#f4f4f0">Biswash Rath</text>
-  <text x="90" y="420" font-family="DejaVu Sans Mono, monospace" font-size="28" fill="#a8a89f">Backend engineer who ships systems, not tutorials.</text>
-  <text x="90" y="560" font-family="DejaVu Sans Mono, monospace" font-size="26" fill="#14b8a6">biswash-rath.netlify.app</text>
+  <text x="90" y="205" font-family="DejaVu Sans Mono, monospace" font-size="72" font-weight="700" fill="#14b8a6">&gt;_</text>
+  <text x="90" y="315" font-family="DejaVu Sans Mono, monospace" font-size="58" font-weight="700" fill="#f4f4f0">Biswash Rath</text>
+  <text x="90" y="390" font-family="DejaVu Sans Mono, monospace" font-size="30" font-weight="600" fill="#14b8a6">Rust Backend Developer</text>
+  <text x="90" y="445" font-family="DejaVu Sans Mono, monospace" font-size="25" fill="#a8a89f">Axum · PostgreSQL · Systems Programming</text>
+  <text x="90" y="560" font-family="DejaVu Sans Mono, monospace" font-size="27" fill="#14b8a6">www.biswashrath.in</text>
 </svg>

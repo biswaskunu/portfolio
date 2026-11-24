@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="hero">
       <div className="hero-inner">
         <p className="hero-eyebrow">
-          <span className="dot"></span> Biswash Rath · Rust Backend Developer · Bhubaneswar, India · Open to remote internships
+          <span className="dot"></span> Biswash Rath · Rust Backend Developer · Bhubaneswar, India · Open to remote work
         </p>
 
         <h1 className="hero-title">
@@ -28,7 +28,7 @@ export default function Hero() {
         <p className="hero-sub">
           2nd‑year CS undergrad specializing in <strong>Rust / Axum / PostgreSQL</strong>. I
           build the kind of backend infrastructure — auth chains, bytecode VMs, real‑time game
-          servers — that most students only read about.
+          servers - that most students only read about.
         </p>
 
         <div className="hero-actions">

@@ -1,6 +1,6 @@
 # Biswash Rath
 
-> Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, Odisha, India. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL, including identity and access management, asynchronous services, system monitoring, bytecode virtual machines and tamper-evident document systems. His work is published in public GitHub repositories. All content below is server-rendered HTML and readable without JavaScript.
+> Biswash Rath is a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, Odisha, India, and is open to remote software engineering internships. He builds backend systems and developer tools with Rust, Axum, Tokio and PostgreSQL, including identity and access management, asynchronous services, system monitoring, bytecode virtual machines and tamper-evident document systems. His work is published in public GitHub repositories. All content below is server-rendered HTML and readable without JavaScript.
 
 ## Pages
 
@@ -13,7 +13,7 @@
 - [sherlock](__SITE_URL__/#work): Local system monitor — samples CPU/memory/disk/process stats, streams over SSE, correlates past spikes to processes.
 - [miniVM Toolchain](__SITE_URL__/#work): Stack-based bytecode VM, assembler and disassembler in pure Rust (std only).
 - [Coder's Hub](__SITE_URL__/#work): Guided coding-learning platform prototype (SIH 2025 pitch).
-- [Kanban](__SITE_URL__/#work): Drag-and-drop task board in plain HTML/CSS/JS.
+- [Kanban](__SITE_URL__/#work): Drag-and-drop task board with Todo, In Progress and Done columns, task counters and local persistence.
 - [lookaway](__SITE_URL__/#work): 20-20-20 screen-break CLI with cross-platform notifications.
 
 ## In progress

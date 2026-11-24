@@ -1,16 +1,44 @@
-# React + Vite
+# Biswash Rath — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Personal portfolio for **Biswash Rath**, a Rust backend developer and Computer Science undergraduate based in Bhubaneswar, Odisha, India. The site is built with React and Vite and is prerendered at build time so search engines and AI search crawlers can read its content without executing JavaScript.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Requirements: Node.js 22 and npm.
 
-## React Compiler
+```bash
+npm ci
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Production build
 
-## Expanding the Oxlint configuration
+```bash
+npm run build
+npm run preview
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+The build creates the client bundle, renders the React app to static HTML, and fills the canonical URL tokens in `index.html`, `robots.txt`, `sitemap.xml`, and `llms.txt`. The single source of truth for the public origin is `src/data/site.js`.
+
+## SEO and discovery
+
+- Canonical public origin: `https://www.biswashrath.in`
+- `https://biswashrath.in` and the former Netlify subdomain redirect to the canonical `www` host via `public/_redirects`.
+- `public/robots.txt` documents crawler access and points to the sitemap.
+- `public/sitemap.xml` is generated with the canonical origin and build date.
+- `public/llms.txt` gives language-model crawlers a concise, human-readable site and project summary.
+- `src/components/JsonLd.jsx` emits Person, WebSite, ProfilePage, FAQPage, and SoftwareSourceCode structured data.
+- `public/og-image.png` is the 1200 × 630 social-sharing image; its editable SVG source is `scripts/og-image.svg`.
+
+When changing the production domain, update `SITE_URL` in `src/data/site.js` and rebuild. Do not hand-edit generated `dist/` output.
+
+## After deploying
+
+1. Confirm `https://www.biswashrath.in` loads over HTTPS.
+2. Confirm the apex domain and `biswash-rath.netlify.app` redirect to the `www` URL, including a path such as `/og-image.png`.
+3. Open `https://www.biswashrath.in/robots.txt` and `https://www.biswashrath.in/sitemap.xml`; verify the sitemap contains the canonical URL.
+4. In Google Search Console, inspect the canonical homepage and submit `https://www.biswashrath.in/sitemap.xml` if it is not already submitted for the correct property.
+5. Add the site to Bing Webmaster Tools and submit the same sitemap (or import the verified Google Search Console property).
+6. Check the social preview using the deployed `https://www.biswashrath.in/og-image.png` URL.
+
+Search indexing, external mentions, and third-party profile updates are account/platform-side tasks; they cannot be completed by a source-code build alone.

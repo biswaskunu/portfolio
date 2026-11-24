@@ -1,0 +1,6 @@
+# Canonical host: www.biswashrath.in. Netlify requires separate HTTP and
+# HTTPS domain-level rules unless SSL is forced for every alias.
+http://biswashrath.in/* https://www.biswashrath.in/:splat 301!
+https://biswashrath.in/* https://www.biswashrath.in/:splat 301!
+http://biswash-rath.netlify.app/* https://www.biswashrath.in/:splat 301!
+https://biswash-rath.netlify.app/* https://www.biswashrath.in/:splat 301!

@@ -1,12 +1,12 @@
-# Allow every crawler full access — the prerendered HTML is the real page.
+# The site is prerendered; crawlers can read the complete page without JavaScript.
 User-agent: *
 Allow: /
 
-# ChatGPT search crawler. Separate from GPTBot (model-training crawler).
+# ChatGPT search crawler (separate from GPTBot model-training crawler).
 User-agent: OAI-SearchBot
 Allow: /
 
-# OpenAI model-training crawler. Kept allowed as in the existing policy.
+# AI assistants and search crawlers.
 User-agent: GPTBot
 Allow: /
 
